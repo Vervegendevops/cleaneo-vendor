@@ -335,7 +335,7 @@ class _OrderReqState extends State<OrderReq> {
                                                   mQuery.size.height * 0.006,
                                             ),
                                             Text(
-                                              OrderRequest[index]['PickupDate'],
+                                              '${OrderRequest[index]['PickupDate']} | ${OrderRequest[index]['PickupTime']}',
                                               style: const TextStyle(
                                                   fontSize: 12,
                                                   fontFamily: 'SatoshiMedium'),

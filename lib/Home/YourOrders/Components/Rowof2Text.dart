@@ -1,5 +1,9 @@
+import 'package:cleaneo_vendor/Home/OrderRequests/Components/orderSummary_bottom_modal.dart';
+import 'package:cleaneo_vendor/Home/OrderRequests/OrderReqDemoData.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:intl/intl.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class YourOrders2Text extends StatefulWidget {
   const YourOrders2Text({Key? key}) : super(key: key);
@@ -14,7 +18,6 @@ class _YourOrders2TextState extends State<YourOrders2Text> {
 
   @override
   Widget build(BuildContext context) {
-    var mQuery = MediaQuery.of(context);
     final List<List<Map<String, List<Map<String, String>>>>> _todaytabData = [
       [
         // Daily data
@@ -110,7 +113,7 @@ class _YourOrders2TextState extends State<YourOrders2Text> {
                     });
                   },
                   child: Container(
-                    width: mQuery.size.width * 0.47,
+                    width: MediaQuery.of(context).size.width * 0.47,
                     padding: const EdgeInsets.symmetric(
                         horizontal: 20, vertical: 10),
                     decoration: BoxDecoration(
@@ -141,24 +144,26 @@ class _YourOrders2TextState extends State<YourOrders2Text> {
             ),
           ),
         ),
-        const SizedBox(height: 20),
+
         // Content based on tab selection
         if (_selectedIndex == 0)
-          Expanded(
-            flex: 3,
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SvgPicture.asset(
-                    'assets/images/noorders.svg',
-                    width: 320, // Adjust the width as needed
-                    height: 320, // Adjust the height as needed
+          OrderRequest.length == 0
+              ? Expanded(
+                  flex: 3,
+                  child: Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SvgPicture.asset(
+                          'assets/images/noorders.svg',
+                          width: 320, // Adjust the width as needed
+                          height: 320, // Adjust the height as needed
+                        ),
+                      ],
+                    ),
                   ),
-                ],
-              ),
-            ),
-          ),
+                )
+              : orderss(),
         if (_selectedIndex == 1)
           Expanded(
             flex: 3,
@@ -226,25 +231,26 @@ class _YourOrders2TextState extends State<YourOrders2Text> {
                                           Text(
                                             'Order ${order['orderNumber']}',
                                             style: const TextStyle(
-                                                color: Colors.black,
-                                                fontFamily: 'SatoshiBold',
-                                                ),
+                                              color: Colors.black,
+                                              fontFamily: 'SatoshiBold',
+                                            ),
                                           ),
                                         ],
                                       ),
                                       Text(
                                         '${order['earning']}',
                                         style: const TextStyle(
-                                            color: Colors.black,
-                                            fontFamily: 'SatoshiBold',
-                                            ),
+                                          color: Colors.black,
+                                          fontFamily: 'SatoshiBold',
+                                        ),
                                       ),
                                     ],
                                   ),
                                 ),
                               ),
                               SizedBox(
-                                height: mQuery.size.height * 0.02,
+                                height:
+                                    MediaQuery.of(context).size.height * 0.02,
                               ),
                               Padding(
                                 padding: const EdgeInsets.symmetric(
@@ -344,11 +350,17 @@ class _YourOrders2TextState extends State<YourOrders2Text> {
                                           children: [
                                             Icon(
                                               Icons.star,
-                                              size: mQuery.size.width * 0.047,
+                                              size: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.047,
                                               color: const Color(0xff29b2fe),
                                             ),
                                             SizedBox(
-                                              width: mQuery.size.width * 0.01,
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.01,
                                             ),
                                             Text(
                                               "${order["rating"]}",
@@ -374,6 +386,329 @@ class _YourOrders2TextState extends State<YourOrders2Text> {
             ),
           ),
       ],
+    );
+  }
+}
+
+class orderss extends StatefulWidget {
+  const orderss({super.key});
+
+  @override
+  State<orderss> createState() => _orderssState();
+}
+
+class _orderssState extends State<orderss> {
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Container(
+        width: double.infinity,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(16),
+            topRight: Radius.circular(16),
+          ),
+        ),
+        child: SingleChildScrollView(
+          child: Column(
+            children: List.generate(OrderRequest.length, (index) {
+              String created_at_str = OrderRequest[index]['created_at'];
+              String formatted_date = '';
+              // Convert the string to a DateTime object
+              DateTime created_at = DateTime.parse(created_at_str).toLocal();
+
+              // Get the current DateTime
+              DateTime current_time = DateTime.now();
+
+              // Get yesterday's DateTime
+              DateTime yesterday = current_time.subtract(Duration(days: 1));
+
+              // Check if the date is today
+              if (created_at.day == current_time.day &&
+                  created_at.month == current_time.month &&
+                  created_at.year == current_time.year) {
+                formatted_date =
+                    "Today ${DateFormat("hh:mm a").format(created_at)}";
+              }
+              // Check if the date is yesterday
+              else if (created_at.day == yesterday.day &&
+                  created_at.month == yesterday.month &&
+                  created_at.year == yesterday.year) {
+                formatted_date =
+                    "Yesterday ${DateFormat("hh:mm a").format(created_at)}";
+              }
+              // Display the full date if it's more than yesterday
+              else {
+                formatted_date =
+                    DateFormat("dd'th' MMMM, yyyy").format(created_at);
+              }
+
+              return Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: Column(
+                  children: [
+                    const SizedBox(
+                      height: 12.0,
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          formatted_date,
+                          style: const TextStyle(
+                              color: Color.fromARGB(255, 181, 181, 181),
+                              fontFamily: 'SatoshiMedium',
+                              fontSize: 12.0),
+                        ),
+                      ],
+                    ),
+                    Container(
+                      margin: const EdgeInsets.symmetric(vertical: 10.0),
+                      width: MediaQuery.of(context).size.width * 0.9,
+                      decoration: BoxDecoration(
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(12.0),
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.5),
+                            spreadRadius: 0,
+                            blurRadius: 7,
+                            offset: const Offset(
+                              0,
+                              0,
+                            ), // changes position of shadow
+                          ),
+                        ],
+                        color: Colors.white,
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            decoration: const BoxDecoration(
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(10.0),
+                                topRight: Radius.circular(10.0),
+                              ),
+                              color: Color(0xffe9f8ff),
+                            ),
+                            width: double.infinity,
+                            height: MediaQuery.of(context).size.height * 0.06,
+                            padding: EdgeInsets.symmetric(
+                              horizontal:
+                                  MediaQuery.of(context).size.width * 0.03,
+                            ),
+                            child: Row(
+                              children: [
+                                SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.02,
+                                ),
+                                Text(
+                                  'Order ID : ${OrderRequest[index]['OrderID']}',
+                                  style: const TextStyle(
+                                      fontSize: 13, fontFamily: 'SatoshiBold'),
+                                ),
+                                const Expanded(child: SizedBox()),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.01,
+                          ),
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 12.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  AppLocalizations.of(context)!.loc,
+                                  style: const TextStyle(
+                                      color: Colors.black54,
+                                      fontFamily: 'SatoshiMedium',
+                                      fontSize: 13),
+                                ),
+                                Text(
+                                  AppLocalizations.of(context)!.acceptin,
+                                  style: const TextStyle(
+                                      color: Colors.black54,
+                                      fontFamily: 'SatoshiMedium',
+                                      fontSize: 13),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 12.0),
+                            child: Row(
+                              children: [
+                                Container(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.045,
+                                  height: MediaQuery.of(context).size.height *
+                                      0.035,
+                                  decoration: const BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: Color(0xff29b2fe)),
+                                  child: Center(
+                                    child: Icon(
+                                      Icons.home,
+                                      color: Colors.white,
+                                      size: MediaQuery.of(context).size.width *
+                                          0.03,
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.02,
+                                ),
+                                Text(
+                                  '${OrderRequest[index]["Caddress"].substring(0, 25)}...',
+                                  style: const TextStyle(
+                                      fontSize: 12, fontFamily: 'SatoshiBold'),
+                                ),
+                                const Expanded(child: SizedBox()),
+                                Text(
+                                  OrderRequest[index]["PickupTime"],
+                                  style: const TextStyle(
+                                      color: Color(0xff29b2fe),
+                                      fontSize: 12,
+                                      fontFamily: 'SatoshiBold'),
+                                )
+                              ],
+                            ),
+                          ),
+                          const Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 12.0),
+                            child: Divider(
+                              color: Color.fromARGB(255, 212, 212, 212),
+                              thickness: 0.7,
+                            ),
+                          ),
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.01,
+                          ),
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 14.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Container(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        AppLocalizations.of(context)!
+                                            .pickdatetime,
+                                        style: const TextStyle(
+                                            color: Colors.black54,
+                                            fontFamily: 'SatoshiMedium',
+                                            fontSize: 12),
+                                      ),
+                                      SizedBox(
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                0.006,
+                                      ),
+                                      Text(
+                                        '${OrderRequest[index]['PickupDate']} | ${OrderRequest[index]['PickupTime']}',
+                                        style: const TextStyle(
+                                            fontSize: 12,
+                                            fontFamily: 'SatoshiMedium'),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                                Container(
+                                  height: 45.0,
+                                  width: 0.4,
+                                  color:
+                                      const Color.fromARGB(255, 195, 195, 195),
+                                ),
+                                Container(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        AppLocalizations.of(context)!
+                                            .deldatetime,
+                                        style: const TextStyle(
+                                            color: Colors.black54,
+                                            fontFamily: 'SatoshiMedium',
+                                            fontSize: 12),
+                                      ),
+                                      SizedBox(
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                0.006,
+                                      ),
+                                      Text(
+                                        '${OrderRequest[index]['DeliveryDate']} | ${OrderRequest[index]['DeliveryTime']}',
+                                        style: const TextStyle(
+                                            fontSize: 12,
+                                            fontFamily: 'SatoshiMedium'),
+                                      )
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.02,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              GestureDetector(
+                                onTap: () {
+                                  // Call the function to open the bottom-up modal
+                                  orderSummary(context, OrderRequest[index]);
+                                },
+                                child: Container(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.9,
+                                  height: MediaQuery.of(context).size.height *
+                                      0.045,
+                                  decoration: const BoxDecoration(
+                                    borderRadius: BorderRadius.only(
+                                      bottomLeft: Radius.circular(10),
+                                      bottomRight: Radius.circular(10),
+                                    ),
+                                    color: Color(0xff29b2fe),
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      // AppLocalizations.of(context)!.acceptorder,
+                                      "VIEW ORDER",
+                                      style: const TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 13,
+                                        fontFamily: 'SatoshiBold',
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            }),
+          ),
+        ),
+      ),
     );
   }
 }

@@ -219,7 +219,12 @@ void orderSummary(context, Map<String, dynamic> data) {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      _showMessage(context);
+                      showModalBottomSheet(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return Container(); // Replace YourBottomSheetWidget with your actual widget
+                        },
+                      );
                     },
                     child: Container(
                       width: double.infinity,
@@ -259,7 +264,7 @@ void orderSummary(context, Map<String, dynamic> data) {
                           ),
                           const Expanded(child: SizedBox()),
                           Text(
-                            "Accept",
+                            "Change Status",
                             style: TextStyle(
                                 color: Colors.white,
                                 fontSize:
@@ -342,8 +347,9 @@ class _productsState extends State<products> {
   @override
   Widget build(BuildContext context) {
     List<dynamic> jsonData = jsonDecode(jsonDecode(widget.data));
+    print(jsonData);
     return Container(
-      height: 600,
+      height: 450,
       child: ListView.separated(
         itemCount: jsonData.length,
         separatorBuilder: (BuildContext context, int index) => const Padding(
@@ -365,7 +371,7 @@ class _productsState extends State<products> {
                   Row(
                     children: [
                       Text(
-                        "${jsonData[index]['quantity']} x ${jsonData[index]['name']}",
+                        "${jsonData[index]['quantity']} x ${jsonData[index]['name']} (${jsonData[index]['type']})",
                         style: TextStyle(
                           fontSize: MediaQuery.of(context).size.height * 0.017,
                           fontFamily: 'SatoshiMedium',

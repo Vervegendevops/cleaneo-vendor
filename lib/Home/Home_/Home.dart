@@ -27,22 +27,22 @@ class _HomePageState extends State<HomePage> {
   TextEditingController searchController = TextEditingController();
 
   final List<Widget> _pages = [
-    const OrderReq(),
-    const OrderStatus(),
+    // const OrderReq(),
+    // const OrderStatus(),
     const MyEarnings(),
     const CashCollected(),
     const OrderReq(),
     const Ledger(),
   ];
   List<Map<String, dynamic>> gridItems = [
-    {
-      "image": "assets/images/Home/Order Requests.png",
-      "text": "Order Requests",
-    },
-    {
-      "image": "assets/images/Home/Order Status.png",
-      "text": "Order Status",
-    },
+    // {
+    //   "image": "assets/images/Home/Order Requests.png",
+    //   "text": "Order Requests",
+    // },
+    // {
+    //   "image": "assets/images/Home/Order Status.png",
+    //   "text": "Order Status",
+    // },
     {
       "image": "assets/images/Home/My Earnings.png",
       "text": "My Earnings",
@@ -132,7 +132,8 @@ class _HomePageState extends State<HomePage> {
                             name: "",
                             radius: 18,
                             fontsize: 10,
-                            img: "https://media.licdn.com/dms/image/C4D03AQHHSwZyheu1UQ/profile-displayphoto-shrink_800_800/0/1662703260529?e=2147483647&v=beta&t=Jm4eBGPY71_8duu5EDtQrXPoUY9yMY-QcRh5OiTztEk",
+                            img:
+                                "https://media.licdn.com/dms/image/C4D03AQHHSwZyheu1UQ/profile-displayphoto-shrink_800_800/0/1662703260529?e=2147483647&v=beta&t=Jm4eBGPY71_8duu5EDtQrXPoUY9yMY-QcRh5OiTztEk",
                           ),
                         )
                       ],
@@ -151,10 +152,9 @@ class _HomePageState extends State<HomePage> {
                             Text(
                               AppLocalizations.of(context)!.welcomeback,
                               style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 17,
-                                fontFamily: 'SatoshiBold'
-                              ),
+                                  color: Colors.white,
+                                  fontSize: 17,
+                                  fontFamily: 'SatoshiBold'),
                             ),
                           ],
                         ),
@@ -181,10 +181,11 @@ class _HomePageState extends State<HomePage> {
                               style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 15,
-                                fontFamily: 'SatoshiMedium'
-                              ),
+                                  fontFamily: 'SatoshiMedium'),
                             ),
-                            SizedBox(width: mQuery.size.width*0.012,),
+                            SizedBox(
+                              width: mQuery.size.width * 0.012,
+                            ),
                             Transform.scale(
                               scale: 0.75,
                               child: Switch(
@@ -195,10 +196,12 @@ class _HomePageState extends State<HomePage> {
                                     status = newValue;
                                   });
                                 },
-                                thumbColor: MaterialStateProperty.resolveWith<Color?>(
-                                      (Set<MaterialState> states) {
+                                thumbColor:
+                                    MaterialStateProperty.resolveWith<Color?>(
+                                  (Set<MaterialState> states) {
                                     // Set thumb color to green when switch is active (on)
-                                    if (states.contains(MaterialState.selected)) {
+                                    if (states
+                                        .contains(MaterialState.selected)) {
                                       return Colors.green;
                                     }
                                     // Return null to use default color for other states
@@ -207,7 +210,6 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               ),
                             ),
-
                           ],
                         )
                       ],
@@ -230,124 +232,122 @@ class _HomePageState extends State<HomePage> {
                         border: InputBorder.none,
                         hintText: AppLocalizations.of(context)!.search,
                         hintStyle: TextStyle(
-                          fontSize: mQuery.size.height * 0.02,
-                          color: const Color.fromARGB(255, 179, 179, 179),
-                          fontFamily: 'SatoshiMedium'
-                        ),
+                            fontSize: mQuery.size.height * 0.02,
+                            color: const Color.fromARGB(255, 179, 179, 179),
+                            fontFamily: 'SatoshiMedium'),
                         suffixIcon: const Icon(Icons.search,
                             color: Color.fromARGB(255, 179, 179, 179)),
                       ),
                     ),
                   ),
-
                 ],
               ),
             ),
             Expanded(
               child: ListView(
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 16
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                       GestureDetector(
-                         onTap : ()
-                         {
-                           Navigator.push(context, MaterialPageRoute(builder: (context){
-                             return OrderReq();
-                           }));
-                         },
-                         child: Container(
-                           width: mQuery.size.width*0.4,
-                           height: mQuery.size.height*0.14,
-                           decoration: BoxDecoration(
-                             color: Colors.white,
-                             borderRadius: BorderRadius.circular(12),
-                             boxShadow: [
-                               BoxShadow(
-                                 color: Colors.grey.withOpacity(0.5),
-                                 spreadRadius: 0,
-                                 blurRadius: 7,
-                                 offset: Offset(0,0)
-                               )
-                             ]
-                           ),
-                           child: Column(
-                             mainAxisAlignment: MainAxisAlignment.center,
-                             children: [
-                               Image.asset("assets/images/Home/Order Requests.png",
-                                width: mQuery.size.width*0.16,),
-                               SizedBox(height: mQuery.size.height*0.006),
-                               Text("Order Request",style: TextStyle(
-                                 fontSize: mQuery.size.height*0.015,
-                                 fontFamily: 'SatoshiMedium'
-                               ),)
-                             ],
-                           ),
-                         ),
-                       ),
-                       GestureDetector(
-                         onTap : ()
-                         {
-                           Navigator.push(context, MaterialPageRoute(builder: (context){
-                             return OrderStatus();
-                           }));
-                         },
-                         child: Container(
-                           width: mQuery.size.width*0.4,
-                           height: mQuery.size.height*0.14,
-                           decoration: BoxDecoration(
-                             color: Colors.white,
-                             borderRadius: BorderRadius.circular(12),
-                             boxShadow: [
-                               BoxShadow(
-                                 color: Colors.grey.withOpacity(0.5),
-                                 spreadRadius: 0,
-                                 blurRadius: 7,
-                                 offset: Offset(0,0)
-                               )
-                             ]
-                           ),
-                           child: Column(
-                             mainAxisAlignment: MainAxisAlignment.center,
-                             children: [
-                               Image.asset("assets/images/Home/Order Status.png",
-                                width: mQuery.size.width*0.1,
-                                ),
-                               SizedBox(height: mQuery.size.height*0.006),
-                               Text("Order Status",style: TextStyle(
-                                   fontFamily: 'SatoshiMedium',
-                                 fontSize: mQuery.size.height*0.015
-                               ),)
-                             ],
-                           ),
-                         ),
-                       ),
-                      ],
-                    ),
+                  // Padding(
+                  //   padding: const EdgeInsets.symmetric(horizontal: 16),
+                  //   child: Row(
+                  //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //     children: [
+                  //       GestureDetector(
+                  //         onTap: () {
+                  //           Navigator.push(context,
+                  //               MaterialPageRoute(builder: (context) {
+                  //             return OrderReq();
+                  //           }));
+                  //         },
+                  //         child: Container(
+                  //           width: mQuery.size.width * 0.4,
+                  //           height: mQuery.size.height * 0.14,
+                  //           decoration: BoxDecoration(
+                  //               color: Colors.white,
+                  //               borderRadius: BorderRadius.circular(12),
+                  //               boxShadow: [
+                  //                 BoxShadow(
+                  //                     color: Colors.grey.withOpacity(0.5),
+                  //                     spreadRadius: 0,
+                  //                     blurRadius: 7,
+                  //                     offset: Offset(0, 0))
+                  //               ]),
+                  //           child: Column(
+                  //             mainAxisAlignment: MainAxisAlignment.center,
+                  //             children: [
+                  //               Image.asset(
+                  //                 "assets/images/Home/Order Requests.png",
+                  //                 width: mQuery.size.width * 0.16,
+                  //               ),
+                  //               SizedBox(height: mQuery.size.height * 0.006),
+                  //               Text(
+                  //                 "Order Request",
+                  //                 style: TextStyle(
+                  //                     fontSize: mQuery.size.height * 0.015,
+                  //                     fontFamily: 'SatoshiMedium'),
+                  //               )
+                  //             ],
+                  //           ),
+                  //         ),
+                  //       ),
+                  //       GestureDetector(
+                  //         onTap: () {
+                  //           Navigator.push(context,
+                  //               MaterialPageRoute(builder: (context) {
+                  //             return OrderStatus();
+                  //           }));
+                  //         },
+                  //         child: Container(
+                  //           width: mQuery.size.width * 0.4,
+                  //           height: mQuery.size.height * 0.14,
+                  //           decoration: BoxDecoration(
+                  //               color: Colors.white,
+                  //               borderRadius: BorderRadius.circular(12),
+                  //               boxShadow: [
+                  //                 BoxShadow(
+                  //                     color: Colors.grey.withOpacity(0.5),
+                  //                     spreadRadius: 0,
+                  //                     blurRadius: 7,
+                  //                     offset: Offset(0, 0))
+                  //               ]),
+                  //           child: Column(
+                  //             mainAxisAlignment: MainAxisAlignment.center,
+                  //             children: [
+                  //               Image.asset(
+                  //                 "assets/images/Home/Order Status.png",
+                  //                 width: mQuery.size.width * 0.1,
+                  //               ),
+                  //               SizedBox(height: mQuery.size.height * 0.006),
+                  //               Text(
+                  //                 "Order Status",
+                  //                 style: TextStyle(
+                  //                     fontFamily: 'SatoshiMedium',
+                  //                     fontSize: mQuery.size.height * 0.015),
+                  //               )
+                  //             ],
+                  //           ),
+                  //         ),
+                  //       ),
+                  //     ],
+                  //   ),
+                  // ),
+                  SizedBox(
+                    height: mQuery.size.height * 0.038,
                   ),
-                  SizedBox(height: mQuery.size.height*0.038,),
-
                   Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 16
-                    ),
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         GestureDetector(
-                          onTap : ()
-                          {
-                            Navigator.push(context, MaterialPageRoute(builder: (context){
+                          onTap: () {
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) {
                               return MyEarnings();
                             }));
                           },
                           child: Container(
-                            width: mQuery.size.width*0.4,
-                            height: mQuery.size.height*0.14,
+                            width: mQuery.size.width * 0.4,
+                            height: mQuery.size.height * 0.14,
                             decoration: BoxDecoration(
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(12),
@@ -356,34 +356,36 @@ class _HomePageState extends State<HomePage> {
                                       color: Colors.grey.withOpacity(0.5),
                                       spreadRadius: 0,
                                       blurRadius: 7,
-                                      offset: Offset(0,0)
-                                  )
-                                ]
-                            ),
+                                      offset: Offset(0, 0))
+                                ]),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Image.asset("assets/images/Home/My Earnings.png",
-                                  width: mQuery.size.width*0.11,),
-                                SizedBox(height: mQuery.size.height*0.006),
-                                Text("My Earnings",style: TextStyle(
-                                    fontFamily: 'SatoshiMedium',
-                                    fontSize: mQuery.size.height*0.015
-                                ),)
+                                Image.asset(
+                                  "assets/images/Home/My Earnings.png",
+                                  width: mQuery.size.width * 0.11,
+                                ),
+                                SizedBox(height: mQuery.size.height * 0.006),
+                                Text(
+                                  "My Earnings",
+                                  style: TextStyle(
+                                      fontFamily: 'SatoshiMedium',
+                                      fontSize: mQuery.size.height * 0.015),
+                                )
                               ],
                             ),
                           ),
                         ),
                         GestureDetector(
-                          onTap : ()
-                          {
-                            Navigator.push(context, MaterialPageRoute(builder: (context){
+                          onTap: () {
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) {
                               return Ledger();
                             }));
                           },
                           child: Container(
-                            width: mQuery.size.width*0.4,
-                            height: mQuery.size.height*0.14,
+                            width: mQuery.size.width * 0.4,
+                            height: mQuery.size.height * 0.14,
                             decoration: BoxDecoration(
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(12),
@@ -392,21 +394,22 @@ class _HomePageState extends State<HomePage> {
                                       color: Colors.grey.withOpacity(0.5),
                                       spreadRadius: 0,
                                       blurRadius: 7,
-                                      offset: Offset(0,0)
-                                  )
-                                ]
-                            ),
+                                      offset: Offset(0, 0))
+                                ]),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Image.asset("assets/images/Home/Cash Collected.png",
-                                  width: mQuery.size.width*0.12,
+                                Image.asset(
+                                  "assets/images/Home/Cash Collected.png",
+                                  width: mQuery.size.width * 0.12,
                                 ),
-                                SizedBox(height: mQuery.size.height*0.006),
-                                Text("Ledger",style: TextStyle(
-                                    fontFamily: 'SatoshiMedium',
-                                    fontSize: mQuery.size.height*0.015
-                                ),)
+                                SizedBox(height: mQuery.size.height * 0.006),
+                                Text(
+                                  "Ledger",
+                                  style: TextStyle(
+                                      fontFamily: 'SatoshiMedium',
+                                      fontSize: mQuery.size.height * 0.015),
+                                )
                               ],
                             ),
                           ),
@@ -414,26 +417,24 @@ class _HomePageState extends State<HomePage> {
                       ],
                     ),
                   ),
-                  SizedBox(height: mQuery.size.height*0.038,),
-
-
+                  SizedBox(
+                    height: mQuery.size.height * 0.038,
+                  ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 16
-                    ),
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         GestureDetector(
-                          onTap : ()
-                          {
-                            Navigator.push(context, MaterialPageRoute(builder: (context){
+                          onTap: () {
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) {
                               return const InventoryRequestPage();
                             }));
                           },
                           child: Container(
-                            width: mQuery.size.width*0.4,
-                            height: mQuery.size.height*0.14,
+                            width: mQuery.size.width * 0.4,
+                            height: mQuery.size.height * 0.14,
                             decoration: BoxDecoration(
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(12),
@@ -442,23 +443,26 @@ class _HomePageState extends State<HomePage> {
                                       color: Colors.grey.withOpacity(0.5),
                                       spreadRadius: 0,
                                       blurRadius: 7,
-                                      offset: Offset(0,0)
-                                  )
-                                ]
-                            ),
+                                      offset: Offset(0, 0))
+                                ]),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Image.asset("assets/images/Home/Delivery Partner Management.png",
-                                  width: mQuery.size.width*0.12,),
-                                SizedBox(height: mQuery.size.height*0.006),
+                                Image.asset(
+                                  "assets/images/Home/Delivery Partner Management.png",
+                                  width: mQuery.size.width * 0.12,
+                                ),
+                                SizedBox(height: mQuery.size.height * 0.006),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Text("Inventory\n Request",style: TextStyle(
-                                        fontSize: mQuery.size.height*0.015,
-                                      fontFamily: 'SatoshiMedium',
-                                    ),),
+                                    Text(
+                                      "Inventory\n Request",
+                                      style: TextStyle(
+                                        fontSize: mQuery.size.height * 0.015,
+                                        fontFamily: 'SatoshiMedium',
+                                      ),
+                                    ),
                                   ],
                                 )
                               ],
@@ -466,15 +470,15 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                         GestureDetector(
-                          onTap : ()
-                          {
-                            Navigator.push(context, MaterialPageRoute(builder: (context){
+                          onTap: () {
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) {
                               return Trainings();
                             }));
                           },
                           child: Container(
-                            width: mQuery.size.width*0.4,
-                            height: mQuery.size.height*0.14,
+                            width: mQuery.size.width * 0.4,
+                            height: mQuery.size.height * 0.14,
                             decoration: BoxDecoration(
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(12),
@@ -483,21 +487,22 @@ class _HomePageState extends State<HomePage> {
                                       color: Colors.grey.withOpacity(0.5),
                                       spreadRadius: 0,
                                       blurRadius: 7,
-                                      offset: Offset(0,0)
-                                  )
-                                ]
-                            ),
+                                      offset: Offset(0, 0))
+                                ]),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Image.asset("assets/images/Home/Cash Collected.png",
-                                  width: mQuery.size.width*0.12,
+                                Image.asset(
+                                  "assets/images/Home/Cash Collected.png",
+                                  width: mQuery.size.width * 0.12,
                                 ),
-                                SizedBox(height: mQuery.size.height*0.006),
-                                Text("Training Modules",style: TextStyle(
-                                    fontFamily: 'SatoshiMedium',
-                                    fontSize: mQuery.size.height*0.015
-                                ),)
+                                SizedBox(height: mQuery.size.height * 0.006),
+                                Text(
+                                  "Training Modules",
+                                  style: TextStyle(
+                                      fontFamily: 'SatoshiMedium',
+                                      fontSize: mQuery.size.height * 0.015),
+                                )
                               ],
                             ),
                           ),

@@ -36,10 +36,9 @@ class _MyDrawerState extends State<MyDrawer> {
           children: [
             GestureDetector(
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) {
-                      return MyProfilePage();
-                    }));
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return MyProfilePage();
+                }));
               },
               child: Container(
                 width: double.infinity,
@@ -84,7 +83,8 @@ class _MyDrawerState extends State<MyDrawer> {
                                         Text(
                                           "$pm",
                                           style: TextStyle(
-                                              fontSize: mQuery.size.height * 0.02,
+                                              fontSize:
+                                                  mQuery.size.height * 0.02,
                                               fontFamily: 'SatoshiBold'),
                                         ),
                                         SizedBox(
@@ -104,13 +104,15 @@ class _MyDrawerState extends State<MyDrawer> {
                                             child: Image.asset(
                                                 "assets/images/drawer-images/edit.png",
                                                 color: const Color(0xff29b2fe),
-                                                width: mQuery.size.width * 0.04),
+                                                width:
+                                                    mQuery.size.width * 0.04),
                                           ),
                                         )
                                       ],
                                     ),
                                     Row(
-                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
                                       children: [
                                         Icon(
                                           Icons.phone_android,
@@ -123,7 +125,8 @@ class _MyDrawerState extends State<MyDrawer> {
                                           "$mobileNo",
                                           style: TextStyle(
                                             fontFamily: 'SatoshiRegular',
-                                            fontSize: mQuery.size.height * 0.015,
+                                            fontSize:
+                                                mQuery.size.height * 0.015,
                                           ),
                                         ),
                                         SizedBox(
@@ -193,27 +196,27 @@ class _MyDrawerState extends State<MyDrawer> {
                                 ),
                               ),
                             )),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) {
-                              return const OrderReq();
-                            }));
-                          },
-                          child: ListTile(
-                            leading: Image.asset(
-                                "assets/images/drawer-images/shopping-bag.png",
-                                color: const Color(0xff29b2fe),
-                                width: mQuery.size.width * 0.06),
-                            title: Text(
-                              "Order Requests",
-                              style: TextStyle(
-                                fontFamily: 'SatoshiBold',
-                                fontSize: mQuery.size.height * 0.021,
-                              ),
-                            ),
-                          ),
-                        ),
+                        // GestureDetector(
+                        //   onTap: () {
+                        //     Navigator.push(context,
+                        //         MaterialPageRoute(builder: (context) {
+                        //       return const OrderReq();
+                        //     }));
+                        //   },
+                        //   child: ListTile(
+                        //     leading: Image.asset(
+                        //         "assets/images/drawer-images/shopping-bag.png",
+                        //         color: const Color(0xff29b2fe),
+                        //         width: mQuery.size.width * 0.06),
+                        //     title: Text(
+                        //       "Order Requests",
+                        //       style: TextStyle(
+                        //         fontFamily: 'SatoshiBold',
+                        //         fontSize: mQuery.size.height * 0.021,
+                        //       ),
+                        //     ),
+                        //   ),
+                        // ),
                         GestureDetector(
                           onTap: () {
                             Navigator.push(context,
@@ -344,8 +347,8 @@ class _MyDrawerState extends State<MyDrawer> {
                           onTap: () {
                             Navigator.push(context,
                                 MaterialPageRoute(builder: (context) {
-                                  return InventoryRequestPage();
-                                }));
+                              return InventoryRequestPage();
+                            }));
                           },
                           child: ListTile(
                             leading: Image.asset(
@@ -452,8 +455,8 @@ class _MyDrawerState extends State<MyDrawer> {
                               children: [
                                 GestureDetector(
                                   onTap: () {
-                                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)
-                                    {
+                                    Navigator.pushReplacement(context,
+                                        MaterialPageRoute(builder: (context) {
                                       return WelcomePage();
                                     }));
                                   },
@@ -475,9 +478,8 @@ class _MyDrawerState extends State<MyDrawer> {
                         Text(
                           "CLEANEO V$versionNo",
                           style: TextStyle(
-                            fontSize: mQuery.size.height * 0.015,
-                            fontFamily: 'SatoshiMedium'
-                          ),
+                              fontSize: mQuery.size.height * 0.015,
+                              fontFamily: 'SatoshiMedium'),
                         ),
                         SizedBox(
                           height: mQuery.size.height * 0.01,
