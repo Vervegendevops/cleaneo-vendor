@@ -1,0 +1,71 @@
+name: cleaneo_vendor
+description: "A new Flutter project."
+
+publish_to: "none"
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.2.2 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.2
+  flutter_localization: ^0.2.0
+  intl: ^0.18.1
+  flutter_svg: ^2.0.9
+  intl_phone_number_input: ^0.7.4
+  country_code_picker: ^3.0.0
+  flutter_profile_picture: ^2.0.0
+  image_picker: ^1.0.7
+  pin_code_fields: ^7.3.0
+  pinput: ^3.0.1
+  shared_preferences: ^2.2.2
+  flutter_rating_bar: ^4.0.1
+  font_awesome_flutter: ^10.7.0
+  flutter_localizations:
+    sdk: flutter
+  url_launcher: ^6.2.5
+  flutter_switch: ^0.3.2
+  carousel_slider: ^4.2.1
+  device_preview: ^1.1.0
+  dotted_line: ^3.2.2
+  provider: ^6.1.2
+  fluttertoast: ^8.2.4
+  like_button: ^2.0.5
+  package_info: ^2.0.2
+  getwidget: ^4.0.0
+  get_storage: ^2.1.1
+  permission_handler: ^11.3.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true
+  generate: true
+
+  assets:
+    - assets/
+    - assets/images/drawer-images/
+    - assets/images/
+    - assets/onboarding/
+    - assets/images/Home/
+
+  fonts:
+    - family: SatoshiRegular
+      fonts:
+        - asset: assets/Fonts/Satoshi-Regular.otf
+    - family: SatoshiLight
+      fonts:
+        - asset: assets/Fonts/Satoshi-Light.otf
+    - family: SatoshiMedium
+      fonts:
+        - asset: assets/Fonts/Satoshi-Medium.otf
+    - family: SatoshiBold
+      fonts:
+        - asset: assets/Fonts/Satoshi-Bold.otf
