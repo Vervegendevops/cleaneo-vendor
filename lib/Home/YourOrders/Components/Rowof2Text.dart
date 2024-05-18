@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:cleaneo_vendor/Home/OrderRequests/Components/orderSummary_bottom_modal.dart';
 import 'package:cleaneo_vendor/Home/OrderRequests/OrderReqDemoData.dart';
 import 'package:flutter/material.dart';
@@ -443,7 +445,12 @@ class _orderssState extends State<orderss> {
                 formatted_date =
                     DateFormat("dd'th' MMMM, yyyy").format(created_at);
               }
-
+              List<dynamic> anything =
+                  jsonDecode(OrderRequest[index]['status']);
+              print(anything.length);
+              setState(() {
+                statuscount = anything.length;
+              });
               return Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: Column(

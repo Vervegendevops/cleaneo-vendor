@@ -37,3 +37,4 @@ List<Map<String, String>> OrderReqData = [
   },
 ];
 List<dynamic> OrderRequest = [];
+int statuscount = 0;
