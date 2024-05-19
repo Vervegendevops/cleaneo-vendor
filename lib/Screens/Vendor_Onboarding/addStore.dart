@@ -1,7 +1,10 @@
+import 'package:cleaneo_vendor/Screens/Vendor_Onboarding/Address/selectLocation.dart';
 import 'package:cleaneo_vendor/Screens/Vendor_Onboarding/storePics.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -18,6 +21,27 @@ class _StoreDetailsPageState extends State<StoreDetailsPage> {
   TextEditingController storeNameController = TextEditingController();
   TextEditingController addressController = TextEditingController();
   TextEditingController gstinController = TextEditingController();
+  Future<void> checkLocationPermission() async {
+    LocationPermission permission = await Geolocator.checkPermission();
+    print("permision :  $permission");
+    if (permission == LocationPermission.whileInUse ||
+        permission == LocationPermission.always) {
+      Navigator.push(context, MaterialPageRoute(builder: (context) {
+        return SearchLocationScreen();
+      })).then((value) => setState(() {}));
+    } else if (permission == LocationPermission.deniedForever ||
+        permission == LocationPermission.denied ||
+        permission == LocationPermission.unableToDetermine) {
+      print('denied');
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.whileInUse ||
+          permission == LocationPermission.always) {
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return SearchLocationScreen();
+        })).then((value) => setState(() {}));
+      }
+    }
+  }
 
   @override
   void initState() {
@@ -136,46 +160,54 @@ class _StoreDetailsPageState extends State<StoreDetailsPage> {
                         SizedBox(
                           height: mQuery.size.height * 0.033,
                         ),
-                        Container(
-                          padding: const EdgeInsets.only(left: 16),
-                          width: double.infinity,
-                          height: mQuery.size.height * 0.06,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(6),
-                            color: Colors.white,
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey.withOpacity(0.5),
-                                spreadRadius: 0,
-                                blurRadius: 7,
-                                offset: const Offset(
-                                    0, 0), // changes the position of the shadow
+                        GestureDetector(
+                          onTap: () {
+                            checkLocationPermission();
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.only(left: 16),
+                            width: double.infinity,
+                            height: mQuery.size.height * 0.06,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(6),
+                              color: Colors.white,
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.5),
+                                  spreadRadius: 0,
+                                  blurRadius: 7,
+                                  offset: const Offset(0,
+                                      0), // changes the position of the shadow
+                                ),
+                              ],
+                            ),
+                            child: TextField(
+                              enabled: false,
+                              onChanged: (value) {
+                                setState(() {
+                                  address = value;
+                                });
+                              },
+                              onSubmitted: (value) {
+                                setState(() {
+                                  address = value;
+                                });
+                              },
+                              cursorColor: Colors.grey,
+                              controller: addressController,
+                              decoration: InputDecoration(
+                                focusedBorder: InputBorder.none,
+                                enabledBorder: InputBorder.none,
+                                contentPadding:
+                                    EdgeInsets.symmetric(vertical: 16),
+                                hintText: Caddress == ''
+                                    ? 'Enter your address'
+                                    : Caddress,
+                                hintStyle: TextStyle(
+                                    fontSize: 13,
+                                    fontFamily: 'SatoshiMedium',
+                                    color: Color(0xffABAFB1)),
                               ),
-                            ],
-                          ),
-                          child: TextField(
-                            onChanged: (value) {
-                              setState(() {
-                                address = value;
-                              });
-                            },
-                            onSubmitted: (value) {
-                              setState(() {
-                                address = value;
-                              });
-                            },
-                            cursorColor: Colors.grey,
-                            controller: addressController,
-                            decoration: const InputDecoration(
-                              focusedBorder: InputBorder.none,
-                              enabledBorder: InputBorder.none,
-                              contentPadding:
-                                  EdgeInsets.symmetric(vertical: 16),
-                              hintText: "Address",
-                              hintStyle: TextStyle(
-                                  fontSize: 13,
-                                  fontFamily: 'SatoshiMedium',
-                                  color: Color(0xffABAFB1)),
                             ),
                           ),
                         ),

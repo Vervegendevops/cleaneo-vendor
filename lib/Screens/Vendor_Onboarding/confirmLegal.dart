@@ -71,6 +71,8 @@ class _ConfirmLegalState extends State<ConfirmLegal> {
       "gstin": gst,
       "selectedService": selectedServices.toString(),
       "pan": panFinal,
+      "Latitude": ALatitude,
+      "Longitude": ALongitude
     };
 
     try {

@@ -18,3 +18,8 @@ XFile? aadhar2;
 XFile? pan;
 List<XFile?> store_picture = List.filled(4, null);
 List<XFile?> store_document = List.filled(4, null);
+String ALatitude = '';
+String ALongitude = '';
+String PlaceID = '';
+String Caddress = '';
+const String apiKey = "AIzaSyAlcZM-RHySJIQmUwOaJmJCVPZcuMKS70Y";
