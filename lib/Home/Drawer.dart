@@ -11,9 +11,11 @@ import 'package:cleaneo_vendor/Home/Training%20Modules/training_modules_page.dar
 import 'package:cleaneo_vendor/Home/YourOrders/YourOrders.dart';
 import 'package:cleaneo_vendor/Home/Inventory%20Request/inventory_request_page.dart';
 import 'package:cleaneo_vendor/Screens/Welcome/WelcomePage.dart';
+import 'package:cleaneo_vendor/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_profile_picture/flutter_profile_picture.dart';
+import 'package:provider/provider.dart';
 
 class MyDrawer extends StatefulWidget {
   const MyDrawer({super.key});
@@ -81,7 +83,7 @@ class _MyDrawerState extends State<MyDrawer> {
                                           height: mQuery.size.height * 0.02,
                                         ),
                                         Text(
-                                          "$pm",
+                                          "${UserLoggedIn.read('Name')}",
                                           style: TextStyle(
                                               fontSize:
                                                   mQuery.size.height * 0.02,
@@ -122,7 +124,7 @@ class _MyDrawerState extends State<MyDrawer> {
                                           width: 5.0,
                                         ),
                                         Text(
-                                          "$mobileNo",
+                                          "+91 ${UserLoggedIn.read('Phone')}",
                                           style: TextStyle(
                                             fontFamily: 'SatoshiRegular',
                                             fontSize:

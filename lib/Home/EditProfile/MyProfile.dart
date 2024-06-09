@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:cleaneo_vendor/Home/BotNav.dart';
+import 'package:cleaneo_vendor/main.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -181,6 +182,7 @@ class _MyProfilePageState extends State<MyProfilePage> {
                                 ],
                               ),
                               child: TextField(
+                                enabled: false,
                                 cursorColor: Colors.grey,
                                 controller: nameController,
                                 decoration: InputDecoration(
@@ -189,7 +191,8 @@ class _MyProfilePageState extends State<MyProfilePage> {
                                   prefixIcon: const Icon(Icons.person),
                                   focusedBorder: InputBorder.none,
                                   enabledBorder: InputBorder.none,
-                                  hintText: "Enter Full Name",
+                                  disabledBorder: InputBorder.none,
+                                  hintText: "${UserLoggedIn.read('Name')}",
                                   hintStyle: TextStyle(
                                     fontSize: mQuery.size.height * 0.02,
                                     fontFamily: 'SatoshiMedium',
@@ -226,6 +229,7 @@ class _MyProfilePageState extends State<MyProfilePage> {
                                   SizedBox(width: mQuery.size.width * 0.03),
                                   const Icon(Icons.phone_outlined),
                                   CountryCodePicker(
+                                    enabled: false,
                                     onChanged: (code) {
                                       setState(() {
                                         selectedCountryCode = code.dialCode!;
@@ -248,6 +252,7 @@ class _MyProfilePageState extends State<MyProfilePage> {
                                   SizedBox(width: mQuery.size.width * 0.02),
                                   Expanded(
                                     child: TextField(
+                                      enabled: false,
                                       keyboardType: TextInputType.phone,
                                       cursorColor: Colors.grey,
                                       controller: phonenoController,
@@ -257,7 +262,8 @@ class _MyProfilePageState extends State<MyProfilePage> {
                                             .digitsOnly // Allow only numeric input
                                       ],
                                       decoration: InputDecoration(
-                                        hintText: "Enter Phone Number*",
+                                        hintText:
+                                            "${UserLoggedIn.read('Phone')}",
                                         hintStyle: TextStyle(
                                           fontSize: mQuery.size.height * 0.02,
                                           fontFamily: 'SatoshiMedium',
@@ -268,6 +274,7 @@ class _MyProfilePageState extends State<MyProfilePage> {
                                         counter: const SizedBox.shrink(),
                                         focusedBorder: InputBorder.none,
                                         enabledBorder: InputBorder.none,
+                                        disabledBorder: InputBorder.none,
                                       ),
                                     ),
                                   ),
@@ -298,6 +305,7 @@ class _MyProfilePageState extends State<MyProfilePage> {
                                 ],
                               ),
                               child: TextField(
+                                enabled: false,
                                 cursorColor: Colors.grey,
                                 controller: emailController,
                                 decoration: InputDecoration(
@@ -306,7 +314,8 @@ class _MyProfilePageState extends State<MyProfilePage> {
                                   prefixIcon: const Icon(Icons.email_outlined),
                                   focusedBorder: InputBorder.none,
                                   enabledBorder: InputBorder.none,
-                                  hintText: "Enter Email",
+                                  disabledBorder: InputBorder.none,
+                                  hintText: "${UserLoggedIn.read('Email')}",
                                   hintStyle: TextStyle(
                                     fontSize: mQuery.size.height * 0.02,
                                     fontFamily: 'SatoshiMedium',

@@ -94,7 +94,7 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 
   Future<Object> fetchResponse2() async {
-    final url = 'https://shrayansh.in/CleaneoVendor/api/count';
+    final url = 'https://drycleaneo.com/CleaneoVendor/api/count';
     String CountUser = '';
     try {
       final response = await http.get(Uri.parse(url));

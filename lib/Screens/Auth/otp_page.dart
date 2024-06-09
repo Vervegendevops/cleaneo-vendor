@@ -139,7 +139,7 @@ class _OTPPageState extends State<OTPPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Enter 4 Digit Code $uniqueOTP",
+                          "Enter 4 Digit Code",
                           style: TextStyle(
                               fontSize: mQuery.size.height * 0.0215,
                               fontFamily: 'SatoshiBold'),
@@ -220,7 +220,13 @@ class _OTPPageState extends State<OTPPage> {
                             });
                             if (uniqueOTP == otp) {
                               print("same");
-
+                              UserLoggedIn.write('UID', UserDataFinal['ID']);
+                              UserLoggedIn.write('Name', UserDataFinal['name']);
+                              UserLoggedIn.write(
+                                  'Email', UserDataFinal['email']);
+                              UserLoggedIn.write(
+                                  'Phone', UserDataFinal['phone']);
+                              UserLoggedIn.write('IsAuthenticated', 'true');
                               Navigator.push(context,
                                   MaterialPageRoute(builder: (context) {
                                 return (Otp == 'Login')

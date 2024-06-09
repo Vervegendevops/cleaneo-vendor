@@ -7,11 +7,13 @@ import 'package:cleaneo_vendor/Home/Ledger/Ledger.dart';
 import 'package:cleaneo_vendor/Home/OrderRequests/OrderRequests.dart';
 import 'package:cleaneo_vendor/Home/OrderStatus/OrderStatus.dart';
 import 'package:cleaneo_vendor/Home/Training%20Modules/training_modules_page.dart';
+import 'package:cleaneo_vendor/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_profile_picture/flutter_profile_picture.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_switch/flutter_switch.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -117,25 +119,25 @@ class _HomePageState extends State<HomePage> {
                           height: 23,
                         ),
                         const Expanded(child: SizedBox()),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) {
-                                  return MyProfilePage();
-                                },
-                              ),
-                            );
-                          },
-                          child: const ProfilePicture(
-                            name: "",
-                            radius: 18,
-                            fontsize: 10,
-                            img:
-                                "https://media.licdn.com/dms/image/C4D03AQHHSwZyheu1UQ/profile-displayphoto-shrink_800_800/0/1662703260529?e=2147483647&v=beta&t=Jm4eBGPY71_8duu5EDtQrXPoUY9yMY-QcRh5OiTztEk",
-                          ),
-                        )
+                        // GestureDetector(
+                        //   onTap: () {
+                        //     Navigator.push(
+                        //       context,
+                        //       MaterialPageRoute(
+                        //         builder: (context) {
+                        //           return MyProfilePage();
+                        //         },
+                        //       ),
+                        //     );
+                        //   },
+                        //   child: const ProfilePicture(
+                        //     name: "",
+                        //     radius: 18,
+                        //     fontsize: 10,
+                        //     img:
+                        //         "https://media.licdn.com/dms/image/C4D03AQHHSwZyheu1UQ/profile-displayphoto-shrink_800_800/0/1662703260529?e=2147483647&v=beta&t=Jm4eBGPY71_8duu5EDtQrXPoUY9yMY-QcRh5OiTztEk",
+                        //   ),
+                        // )
                       ],
                     ),
                   ),
@@ -167,7 +169,7 @@ class _HomePageState extends State<HomePage> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "Narendra",
+                          "${UserLoggedIn.read('Name')}",
                           style: TextStyle(
                             color: Colors.white,
                             fontFamily: 'SatoshiBold',

@@ -1,3 +1,4 @@
+import 'package:cleaneo_vendor/Home/BotNav.dart';
 import 'package:cleaneo_vendor/Screens/Splash.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +7,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get_storage/get_storage.dart';
 
 String Otp = '';
+final UserLoggedIn = GetStorage();
 
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -34,6 +36,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    print(UserLoggedIn.read('IsAuthenticated'));
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Cleaneo Vendor',
@@ -49,18 +52,16 @@ class _MyAppState extends State<MyApp> {
           GlobalWidgetsLocalizations.delegate,
         ],
         supportedLocales: const [Locale('en'), Locale('hi')],
-        home: SplashScreen());
+        home: UserLoggedIn.read('IsAuthenticated') == 'true'
+            ? BotNav()
+            : SplashScreen());
   }
 }
 
 final authentication = GetStorage().write('Authentication', '');
 // Check
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(
-      // DevicePreview(
-      //   enabled: true,
-      //   builder: (context) => const MyApp(),
-      // ),
-      MyApp());
+  await GetStorage.init();
+  runApp(MyApp());
 }

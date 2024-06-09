@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:math';
 import 'package:cleaneo_vendor/Constant/signupVariables.dart';
 import 'package:cleaneo_vendor/Screens/Auth/otp_page.dart';
@@ -15,6 +16,7 @@ import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 
 final authentication = GetStorage();
+Map UserDataFinal = {};
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -51,7 +53,8 @@ class _LoginPageState extends State<LoginPage> {
 
       if (response.statusCode == 200) {
         print(response.body);
-        if (response.body == "false") {
+
+        if (response.body == 'false') {
           setState(() {
             ispressed = false;
           });
@@ -65,12 +68,36 @@ class _LoginPageState extends State<LoginPage> {
             ),
           );
         } else {
+          UserDataFinal = jsonDecode(response.body);
           uniqueOTP = (1000 + Random().nextInt(9000)).toString();
           authentication.write('Authentication', 'loggedIN');
-          Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return OTPPage();
-          }));
+          fetchResponse2(phoneNumber);
         }
+        return response.body == 'true';
+      } else {
+        // If the response status code is not 200, throw an exception or handle
+        // the error accordingly.
+        throw Exception('Failed to fetch data: ${response.statusCode}');
+      }
+    } catch (e) {
+      // Handle exceptions if any occur during the request.
+      print('Error fetching data: $e');
+      return false; // Return false in case of an error.
+    }
+  }
+
+  Future<Object> fetchResponse2(String phoneNumber) async {
+    final url =
+        'http://app.pingbix.com/SMSApi/send?userid=cleaneoapp&password=EghpgNS3&sendMethod=quick&mobile=$phoneNumber&msg=Hello+${UserDataFinal['name']}%2C%0D%0AYour+OTP+for+Cleaneo+login%2Fsignup+is+%3A+$uniqueOTP.%0D%0AThank+You&senderid=CLE123&msgType=text&dltEntityId=&dltTemplateId=1207171510723882445&duplicatecheck=true&output=json';
+
+    try {
+      final response = await http.get(Uri.parse(url));
+
+      if (response.statusCode == 200) {
+        print('otp Sent');
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return OTPPage();
+        }));
         return response.body == 'true';
       } else {
         // If the response status code is not 200, throw an exception or handle

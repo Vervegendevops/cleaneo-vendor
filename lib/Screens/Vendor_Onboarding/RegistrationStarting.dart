@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class RegStart extends StatefulWidget {
   const RegStart({Key? key}) : super(key: key);
@@ -80,8 +81,7 @@ class _RegStartState extends State<RegStart> {
                               child: Text(
                                 AppLocalizations.of(context)!.regdesc,
                                 style: const TextStyle(
-                                  fontFamily: 'SatoshiMedium',
-                                    fontSize: 15),
+                                    fontFamily: 'SatoshiMedium', fontSize: 15),
                               ),
                             ),
                           ],
@@ -116,6 +116,49 @@ class _RegStartState extends State<RegStart> {
                                     fontFamily: 'SatoshiBold'),
                               ),
                             ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: mQuery.size.height * 0.02,
+                        ),
+                        Container(
+                          width: MediaQuery.of(context).size.width,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                'Note : Having trouble signing in?\n',
+                                style: TextStyle(
+                                    height: 1 / 4, color: Colors.grey),
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Contact us at ',
+                                    style: TextStyle(color: Colors.grey),
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      // ignore: deprecated_member_use
+                                      launch("tel:+91 5678933738");
+                                    },
+                                    child: Text(
+                                      '+91 5678933738',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors
+                                              .blue), // Change color to indicate it's clickable
+                                    ),
+                                  ),
+                                  Text(
+                                    ' for help!',
+                                    style: TextStyle(color: Colors.grey),
+                                  ),
+                                ],
+                              )
+                            ],
                           ),
                         ),
                         SizedBox(

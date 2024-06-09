@@ -7,6 +7,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../Constant/signupVariables.dart';
 
@@ -336,7 +337,7 @@ class _StoreDetailsPageState extends State<StoreDetailsPage> {
                           ],
                         ),
                         SizedBox(
-                          height: mQuery.size.height * 0.087,
+                          height: mQuery.size.height * 0.05,
                         ),
                         GestureDetector(
                           onTap: () {
@@ -380,6 +381,49 @@ class _StoreDetailsPageState extends State<StoreDetailsPage> {
                                     fontFamily: 'SatoshiBold'),
                               ),
                             ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: mQuery.size.height * 0.02,
+                        ),
+                        Container(
+                          width: MediaQuery.of(context).size.width,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                'Note : Having trouble signing in?\n',
+                                style: TextStyle(
+                                    height: 1 / 4, color: Colors.grey),
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Contact us at ',
+                                    style: TextStyle(color: Colors.grey),
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      // ignore: deprecated_member_use
+                                      launch("tel:+91 5678933738");
+                                    },
+                                    child: Text(
+                                      '+91 5678933738',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors
+                                              .blue), // Change color to indicate it's clickable
+                                    ),
+                                  ),
+                                  Text(
+                                    ' for help!',
+                                    style: TextStyle(color: Colors.grey),
+                                  ),
+                                ],
+                              )
+                            ],
                           ),
                         ),
                         SizedBox(

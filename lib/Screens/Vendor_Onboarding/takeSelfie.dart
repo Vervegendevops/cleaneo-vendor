@@ -5,6 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'package:cleaneo_vendor/Constant/signupVariables.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class TakeSelfie extends StatefulWidget {
   const TakeSelfie({Key? key}) : super(key: key);
@@ -149,7 +150,7 @@ class _TakeSelfieState extends State<TakeSelfie> {
                           : GestureDetector(
                               onTap: () async {
                                 XFile? pickedImage = await _imagePicker
-                                    .pickImage(source: ImageSource.camera);
+                                    .pickImage(source: ImageSource.gallery);
 
                                 setState(() {
                                   _selfie = pickedImage;
@@ -176,8 +177,51 @@ class _TakeSelfieState extends State<TakeSelfie> {
                               ),
                             ),
                       SizedBox(
+                        height: mQuery.size.height * 0.02,
+                      ),
+                      Container(
+                        width: MediaQuery.of(context).size.width,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Note : Having trouble signing in?\n',
+                              style:
+                                  TextStyle(height: 1 / 4, color: Colors.grey),
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'Contact us at ',
+                                  style: TextStyle(color: Colors.grey),
+                                ),
+                                GestureDetector(
+                                  onTap: () {
+                                    // ignore: deprecated_member_use
+                                    launch("tel:+91 5678933738");
+                                  },
+                                  child: Text(
+                                    '+91 5678933738',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors
+                                            .blue), // Change color to indicate it's clickable
+                                  ),
+                                ),
+                                Text(
+                                  ' for help!',
+                                  style: TextStyle(color: Colors.grey),
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+                      SizedBox(
                         height: mQuery.size.height * 0.04,
-                      )
+                      ),
                     ],
                   ),
                 ),

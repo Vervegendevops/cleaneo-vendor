@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:cleaneo_vendor/Constant/signupVariables.dart';
+import 'package:cleaneo_vendor/Home/BotNav.dart';
 import 'package:cleaneo_vendor/Screens/Vendor_Onboarding/Verifying.dart';
 import 'package:cleaneo_vendor/Screens/Vendor_Onboarding/takeSelfie.dart';
 import 'package:cleaneo_vendor/end.dart';
@@ -10,6 +11,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
+import 'package:url_launcher/url_launcher.dart';
 
 class ConfirmLegal extends StatefulWidget {
   const ConfirmLegal({Key? key}) : super(key: key);
@@ -20,8 +22,10 @@ class ConfirmLegal extends StatefulWidget {
 
 class _ConfirmLegalState extends State<ConfirmLegal> {
   Future<void> postData() async {
-    const String apiUrl = 'https://shrayansh.in/CleaneoVendor/api/signup';
-
+    print('good');
+    const String apiUrl = 'https://drycleaneo.com/CleaneoVendor/api/signup';
+    print(ALatitude);
+    print(ALongitude);
     // Load image files
     String imagePath = store_picture[0]!.path;
     File imageFile = File(imagePath);
@@ -61,7 +65,7 @@ class _ConfirmLegalState extends State<ConfirmLegal> {
 
     // JSON data
     Map<String, String> jsonFields = {
-      "id": UserID,
+      "ID": UserID,
       "name": name,
       "phone": phoneFinal,
       "email": email,
@@ -165,14 +169,14 @@ class _ConfirmLegalState extends State<ConfirmLegal> {
         imageFile12.lengthSync(),
         filename: 'selfie.jpg',
       ));
-
+      print(request);
       var response = await request.send();
 
       if (response.statusCode == 200) {
         // Handle a successful response here
         var responseBody = await response.stream.bytesToString();
         print("Success: $responseBody");
-        Navigator.push(context, MaterialPageRoute(builder: (_) => end()));
+        Navigator.push(context, MaterialPageRoute(builder: (_) => BotNav()));
       } else {
         // Handle errors or other status codes here
         print("Error: ${response.statusCode}");
@@ -386,6 +390,49 @@ class _ConfirmLegalState extends State<ConfirmLegal> {
                                 ),
                               ),
                             ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: mQuery.size.height * 0.02,
+                        ),
+                        Container(
+                          width: MediaQuery.of(context).size.width,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                'Note : Having trouble signing in?\n',
+                                style: TextStyle(
+                                    height: 1 / 4, color: Colors.grey),
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Contact us at ',
+                                    style: TextStyle(color: Colors.grey),
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      // ignore: deprecated_member_use
+                                      launch("tel:+91 5678933738");
+                                    },
+                                    child: Text(
+                                      '+91 5678933738',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors
+                                              .blue), // Change color to indicate it's clickable
+                                    ),
+                                  ),
+                                  Text(
+                                    ' for help!',
+                                    style: TextStyle(color: Colors.grey),
+                                  ),
+                                ],
+                              )
+                            ],
                           ),
                         ),
                         SizedBox(

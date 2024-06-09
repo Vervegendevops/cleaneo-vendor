@@ -15,6 +15,13 @@ class YourOrders2Text extends StatefulWidget {
 }
 
 class _YourOrders2TextState extends State<YourOrders2Text> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    OrderRequest = OrderRequest;
+  }
+
   int _selectedIndex = 0;
   final List<String> _tabNames = ['Ongoing', 'Previous'];
 

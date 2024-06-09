@@ -6,6 +6,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 
+import 'package:url_launcher/url_launcher.dart';
+
 class UploadAdhaar extends StatefulWidget {
   const UploadAdhaar({Key? key}) : super(key: key);
 
@@ -149,6 +151,49 @@ class _UploadAdhaarState extends State<UploadAdhaar> {
                                 ),
                               ),
                             ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: mQuery.size.height * 0.02,
+                      ),
+                      Container(
+                        width: MediaQuery.of(context).size.width,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Note : Having trouble signing in?\n',
+                              style:
+                                  TextStyle(height: 1 / 4, color: Colors.grey),
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'Contact us at ',
+                                  style: TextStyle(color: Colors.grey),
+                                ),
+                                GestureDetector(
+                                  onTap: () {
+                                    // ignore: deprecated_member_use
+                                    launch("tel:+91 5678933738");
+                                  },
+                                  child: Text(
+                                    '+91 5678933738',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors
+                                            .blue), // Change color to indicate it's clickable
+                                  ),
+                                ),
+                                Text(
+                                  ' for help!',
+                                  style: TextStyle(color: Colors.grey),
+                                ),
+                              ],
+                            )
                           ],
                         ),
                       ),

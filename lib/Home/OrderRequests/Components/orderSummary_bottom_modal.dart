@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_profile_picture/flutter_profile_picture.dart';
 
+int countStatus = 0;
 void orderSummary(context, Map<String, dynamic> data) {
   var shirtsNo1 = 01;
   var blouseNo = 03;
@@ -86,6 +87,8 @@ void orderSummary(context, Map<String, dynamic> data) {
     context: context,
     isScrollControlled: true,
     builder: (BuildContext context) {
+      List<dynamic> statusCount = jsonDecode(data['status']);
+      countStatus = statusCount.length;
       String totalSum = '₹ ${calculateTotal(prices).toStringAsFixed(2)}';
       return Container(
           decoration: const BoxDecoration(
@@ -221,12 +224,17 @@ void orderSummary(context, Map<String, dynamic> data) {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      showModalBottomSheet(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return ChangeStatusSheet(); // Replace YourBottomSheetWidget with your actual widget
-                        },
-                      );
+                      print(countStatus);
+                      if (countStatus > 2)
+                        showModalBottomSheet(
+                          context: context,
+                          isScrollControlled: true,
+                          builder: (BuildContext context) {
+                            return ChangeStatusSheet(
+                              statusCount: countStatus,
+                            ); // Replace YourBottomSheetWidget with your actual widget
+                          },
+                        );
                     },
                     child: Container(
                       width: double.infinity,
@@ -266,7 +274,9 @@ void orderSummary(context, Map<String, dynamic> data) {
                           ),
                           const Expanded(child: SizedBox()),
                           Text(
-                            "Change Status",
+                            countStatus < 3
+                                ? 'Order yet to Arrive'
+                                : "Change Status",
                             style: TextStyle(
                                 color: Colors.white,
                                 fontSize:
