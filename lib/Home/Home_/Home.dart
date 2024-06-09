@@ -14,6 +14,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:provider/provider.dart';
+import 'package:http/http.dart' as http;
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -23,6 +24,33 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  // https://drycleaneo.com/CleaneoVendor/api/onOff/CleaneoVendor00011
+
+  Future<Object> fetchResponse() async {
+    final url =
+        'https://drycleaneo.com/CleaneoVendor/api/onOff/${UserLoggedIn.read('UID')}';
+
+    try {
+      final response = await http.get(Uri.parse(url));
+
+      if (response.statusCode == 200) {
+        print('otp Sent');
+        // Navigator.push(context, MaterialPageRoute(builder: (context) {
+        //   return OTPPage();
+        // }));
+        return response.body == 'true';
+      } else {
+        // If the response status code is not 200, throw an exception or handle
+        // the error accordingly.
+        throw Exception('Failed to fetch data: ${response.statusCode}');
+      }
+    } catch (e) {
+      // Handle exceptions if any occur during the request.
+      print('Error fetching data: $e');
+      return false; // Return false in case of an error.
+    }
+  }
+
   var orderNo = 3;
   int selectedContainerIndex = -1;
 
@@ -68,6 +96,12 @@ class _HomePageState extends State<HomePage> {
     "https://cdn.vectorstock.com/i/preview-1x/10/75/amazing-deals-sign-over-colorful-cut-out-foil-vector-48291075.jpg",
     // Add more image filenames as needed
   ];
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    fetchResponse();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -196,6 +230,7 @@ class _HomePageState extends State<HomePage> {
                                 onChanged: (newValue) {
                                   setState(() {
                                     status = newValue;
+                                    fetchResponse();
                                   });
                                 },
                                 thumbColor:

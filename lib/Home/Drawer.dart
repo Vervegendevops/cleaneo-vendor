@@ -219,27 +219,27 @@ class _MyDrawerState extends State<MyDrawer> {
                         //     ),
                         //   ),
                         // ),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) {
-                              return OrderStatus();
-                            }));
-                          },
-                          child: ListTile(
-                            leading: Image.asset(
-                                "assets/images/drawer-images/location_icon.png",
-                                color: const Color(0xff29b2fe),
-                                width: mQuery.size.width * 0.06),
-                            title: Text(
-                              "Order Status",
-                              style: TextStyle(
-                                fontFamily: 'SatoshiBold',
-                                fontSize: mQuery.size.height * 0.021,
-                              ),
-                            ),
-                          ),
-                        ),
+                        // GestureDetector(
+                        //   onTap: () {
+                        //     Navigator.push(context,
+                        //         MaterialPageRoute(builder: (context) {
+                        //       return OrderStatus();
+                        //     }));
+                        //   },
+                        //   child: ListTile(
+                        //     leading: Image.asset(
+                        //         "assets/images/drawer-images/location_icon.png",
+                        //         color: const Color(0xff29b2fe),
+                        //         width: mQuery.size.width * 0.06),
+                        //     title: Text(
+                        //       "Order Status",
+                        //       style: TextStyle(
+                        //         fontFamily: 'SatoshiBold',
+                        //         fontSize: mQuery.size.height * 0.021,
+                        //       ),
+                        //     ),
+                        //   ),
+                        // ),
                         GestureDetector(
                           onTap: () {
                             Navigator.push(context,

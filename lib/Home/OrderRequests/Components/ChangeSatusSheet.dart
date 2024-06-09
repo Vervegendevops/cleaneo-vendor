@@ -1,35 +1,15 @@
 import 'dart:convert';
 
+import 'package:cleaneo_vendor/Home/BotNav.dart';
 import 'package:cleaneo_vendor/Home/OrderRequests/Components/tracker.dart';
 import 'package:cleaneo_vendor/Home/OrderRequests/OrderReqDemoData.dart';
+import 'package:cleaneo_vendor/Screens/Auth/Signup.dart';
+import 'package:cleaneo_vendor/Screens/Auth/otp_page.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:order_tracker/order_tracker.dart';
 
 int changeStatusCount = 0;
-Future<void> _triggerApiCall() async {
-  final String apiUrl =
-      'https://drycleaneo.com/CleaneoVendor/api/updateOrderStatus/000000122';
-
-  try {
-    final response = await http.post(
-      Uri.parse(apiUrl),
-    );
-
-    if (response.statusCode == 200) {
-      // Successful API call
-      changeStatusCount = jsonDecode(response.body).length;
-      print(changeStatusCount);
-      print('API call successful');
-    } else {
-      // API call failed
-      print('Failed with status code: ${response.statusCode}');
-    }
-  } catch (e) {
-    // Exception occurred
-    print('Exception: $e');
-  }
-}
 
 class ChangeStatusSheet extends StatefulWidget {
   int statusCount;
@@ -48,6 +28,35 @@ Map<String, String> demoMap = {
 int mapLength = demoMap.length;
 
 class _ChangeStatusSheetState extends State<ChangeStatusSheet> {
+  Future<void> _triggerApiCall() async {
+    final String apiUrl =
+        'https://drycleaneo.com/CleaneoVendor/api/updateOrderStatus/000000125';
+
+    try {
+      final response = await http.post(
+        Uri.parse(apiUrl),
+      );
+
+      if (response.statusCode == 200) {
+        // Successful API call
+        changeStatusCount = jsonDecode(response.body).length;
+        print(changeStatusCount);
+        print('API call successful');
+        print('hello');
+        // Navigator.pop(context as BuildContext);
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return BotNav();
+        }));
+      } else {
+        // API call failed
+        print('Failed with status code: ${response.statusCode}');
+      }
+    } catch (e) {
+      // Exception occurred
+      print('Exception: $e');
+    }
+  }
+
   List<TextDtoo> orderList = [
     TextDtoo("Order has reached to you", ''),
     // TextDtoo("Seller ha processed your order", "Sun, 27th Mar '22 - 10:19am"),
@@ -98,7 +107,9 @@ class _ChangeStatusSheetState extends State<ChangeStatusSheet> {
               deliveredTitleAndDateList: deliveredList,
             ),
             GestureDetector(
-              onTap: () {},
+              onTap: () {
+                _triggerApiCall();
+              },
               child: Container(
                 width: double.infinity,
                 height: MediaQuery.of(context).size.height * 0.06,
