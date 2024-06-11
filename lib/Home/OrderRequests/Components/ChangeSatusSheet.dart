@@ -13,7 +13,9 @@ int changeStatusCount = 0;
 
 class ChangeStatusSheet extends StatefulWidget {
   int statusCount;
-  ChangeStatusSheet({super.key, required this.statusCount});
+  String orderID;
+  ChangeStatusSheet(
+      {super.key, required this.statusCount, required this.orderID});
 
   @override
   State<ChangeStatusSheet> createState() => _ChangeStatusSheetState();
@@ -30,7 +32,7 @@ int mapLength = demoMap.length;
 class _ChangeStatusSheetState extends State<ChangeStatusSheet> {
   Future<void> _triggerApiCall() async {
     final String apiUrl =
-        'https://drycleaneo.com/CleaneoVendor/api/updateOrderStatus/000000125';
+        'https://drycleaneo.com/CleaneoVendor/api/updateOrderStatus/${widget.orderID}';
 
     try {
       final response = await http.post(
