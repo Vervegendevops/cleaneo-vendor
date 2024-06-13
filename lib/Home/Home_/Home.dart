@@ -34,7 +34,7 @@ class _HomePageState extends State<HomePage> {
       final response = await http.get(Uri.parse(url));
 
       if (response.statusCode == 200) {
-        print('otp Sent');
+        print('otpp Sent');
         // Navigator.push(context, MaterialPageRoute(builder: (context) {
         //   return OTPPage();
         // }));
