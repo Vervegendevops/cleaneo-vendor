@@ -176,7 +176,12 @@ class _ConfirmLegalState extends State<ConfirmLegal> {
         // Handle a successful response here
         var responseBody = await response.stream.bytesToString();
         print("Success: $responseBody");
-        Navigator.push(context, MaterialPageRoute(builder: (_) => BotNav()));
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (_) => BotNav(
+                      indexx: 0,
+                    )));
       } else {
         // Handle errors or other status codes here
         print("Error: ${response.statusCode}");

@@ -53,7 +53,9 @@ class _MyAppState extends State<MyApp> {
         ],
         supportedLocales: const [Locale('en'), Locale('hi')],
         home: UserLoggedIn.read('IsAuthenticated') == 'true'
-            ? BotNav()
+            ? BotNav(
+                indexx: 0,
+              )
             : SplashScreen());
   }
 }

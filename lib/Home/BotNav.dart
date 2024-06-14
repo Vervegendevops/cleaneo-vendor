@@ -9,20 +9,22 @@ import 'package:cleaneo_vendor/Home/CashCollected/CashCollected.dart';
 import 'package:cleaneo_vendor/Home/Earnings/MyEarnings.dart';
 
 class BotNav extends StatefulWidget {
-  const BotNav({Key? key}) : super(key: key);
+  int indexx;
+  BotNav({Key? key, required this.indexx}) : super(key: key);
 
   @override
   State<BotNav> createState() => _BotNavState();
 }
 
 class _BotNavState extends State<BotNav> {
-  int _selectedIndex = 0;
   late PageController _pageController;
-
+  int _selectedIndex = 0;
   @override
   void initState() {
     super.initState();
-    _pageController = PageController(initialPage: _selectedIndex);
+    _selectedIndex = widget.indexx;
+    print(_selectedIndex);
+    _pageController = PageController(initialPage: widget.indexx);
   }
 
   @override

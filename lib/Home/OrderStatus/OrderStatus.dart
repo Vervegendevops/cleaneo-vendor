@@ -66,7 +66,8 @@ class _OrderStatusState extends State<OrderStatus> {
                       children: [
                         SizedBox(height: mQuery.size.height * 0.02),
                         Padding(
-                          padding: EdgeInsets.only(left: mQuery.size.width * 0.045),
+                          padding:
+                              EdgeInsets.only(left: mQuery.size.width * 0.045),
                           child: Text(
                             "Order Status - ID #12345",
                             style: TextStyle(
@@ -90,7 +91,8 @@ class _OrderStatusState extends State<OrderStatus> {
                                 radius: mQuery.size.width * 0.05,
                                 fontsize: 10,
                                 name: "",
-                                img: "https://images.news18.com/ibnkhabar/uploads/2023/09/IFS-Apala-mishra-age-upsc-rank-education-biography-in-hindi-marksheet-salary-1.jpg",
+                                img:
+                                    "https://images.news18.com/ibnkhabar/uploads/2023/09/IFS-Apala-mishra-age-upsc-rank-education-biography-in-hindi-marksheet-salary-1.jpg",
                               ),
                               SizedBox(
                                 width: mQuery.size.width * 0.025,
@@ -111,13 +113,13 @@ class _OrderStatusState extends State<OrderStatus> {
                                       SizedBox(
                                         width: mQuery.size.width * 0.3,
                                       ),
-
                                     ],
                                   ),
                                   Text(
                                     "Clock Tower Dehradun",
-                                    style: TextStyle(fontSize: 10,
-                                     fontFamily: 'SatoshiMedium'),
+                                    style: TextStyle(
+                                        fontSize: 10,
+                                        fontFamily: 'SatoshiMedium'),
                                   )
                                 ],
                               )
@@ -151,19 +153,20 @@ class _OrderStatusState extends State<OrderStatus> {
                                   ),
                                   SizedBox(width: mQuery.size.width * 0.03),
                                   Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         "Order Accepted",
                                         style: TextStyle(
-                                          fontFamily: 'SatoshiBold'
-                                        ),
+                                            fontFamily: 'SatoshiBold'),
                                       ),
                                       Text(
                                         "18th Jul 2021, 8:09 pm",
-                                        style: TextStyle(color: Colors.black54,
-                                        fontSize: 12,
-                                        fontFamily: 'SatoshiMedium'),
+                                        style: TextStyle(
+                                            color: Colors.black54,
+                                            fontSize: 12,
+                                            fontFamily: 'SatoshiMedium'),
                                       )
                                     ],
                                   ),
@@ -175,23 +178,32 @@ class _OrderStatusState extends State<OrderStatus> {
                                       });
                                     },
                                     child: Container(
-                                      width:
-                                      MediaQuery.of(context).size.width * 0.065,
+                                      width: MediaQuery.of(context).size.width *
+                                          0.065,
                                       height:
-                                      MediaQuery.of(context).size.height * 0.05,
+                                          MediaQuery.of(context).size.height *
+                                              0.05,
                                       decoration: BoxDecoration(
                                         shape: BoxShape.circle,
                                         border: Border.all(
-                                          color: isChecked1 ? Color(0xff29b2fe)  : Colors.grey, // Change border color when selected
+                                          color: isChecked1
+                                              ? Color(0xff29b2fe)
+                                              : Colors
+                                                  .grey, // Change border color when selected
                                         ),
-                                        color: isChecked1 ? Color(0xff29b2fe)  : Colors.transparent, // Change background color when selected
+                                        color: isChecked1
+                                            ? Color(0xff29b2fe)
+                                            : Colors
+                                                .transparent, // Change background color when selected
                                       ),
                                       child: isChecked1
                                           ? Icon(
-                                        Icons.check,
-                                        size: 14, // Adjust the icon size as needed
-                                        color: Colors.white, // Change the check color
-                                      )
+                                              Icons.check,
+                                              size:
+                                                  14, // Adjust the icon size as needed
+                                              color: Colors
+                                                  .white, // Change the check color
+                                            )
                                           : null,
                                     ),
                                   )
@@ -199,7 +211,7 @@ class _OrderStatusState extends State<OrderStatus> {
                               ),
                               Divider(),
                               SizedBox(height: mQuery.size.height * 0.02),
-                    
+
                               // Order PickedUp
                               Row(
                                 children: [
@@ -220,17 +232,18 @@ class _OrderStatusState extends State<OrderStatus> {
                                   ),
                                   SizedBox(width: mQuery.size.width * 0.03),
                                   Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         "Order Recieved",
                                         style: TextStyle(
-                                            fontFamily: 'SatoshiBold'
-                                        ),
+                                            fontFamily: 'SatoshiBold'),
                                       ),
                                       Text(
                                         "18th Jul 2021, 8:09 pm",
-                                        style: TextStyle(color: Colors.black54,
+                                        style: TextStyle(
+                                            color: Colors.black54,
                                             fontSize: 12,
                                             fontFamily: 'SatoshiMedium'),
                                       )
@@ -244,23 +257,28 @@ class _OrderStatusState extends State<OrderStatus> {
                                       });
                                     },
                                     child: Container(
-                                      width:
-                                      MediaQuery.of(context).size.width * 0.065,
+                                      width: MediaQuery.of(context).size.width *
+                                          0.065,
                                       height:
-                                      MediaQuery.of(context).size.height * 0.05,
+                                          MediaQuery.of(context).size.height *
+                                              0.05,
                                       decoration: BoxDecoration(
                                         shape: BoxShape.circle,
                                         border: Border.all(
-                                          color: isChecked2 ? Color(0xff29b2fe)  : Colors.grey,
+                                          color: isChecked2
+                                              ? Color(0xff29b2fe)
+                                              : Colors.grey,
                                         ),
-                                        color: isChecked2 ? Color(0xff29b2fe)  : Colors.transparent,
+                                        color: isChecked2
+                                            ? Color(0xff29b2fe)
+                                            : Colors.transparent,
                                       ),
                                       child: isChecked2
                                           ? Icon(
-                                        Icons.check,
-                                        size: 14,
-                                        color: Colors.white,
-                                      )
+                                              Icons.check,
+                                              size: 14,
+                                              color: Colors.white,
+                                            )
                                           : null,
                                     ),
                                   )
@@ -268,7 +286,7 @@ class _OrderStatusState extends State<OrderStatus> {
                               ),
                               Divider(),
                               SizedBox(height: mQuery.size.height * 0.02),
-                    
+
                               // Order in Process
                               Row(
                                 children: [
@@ -289,17 +307,18 @@ class _OrderStatusState extends State<OrderStatus> {
                                   ),
                                   SizedBox(width: mQuery.size.width * 0.03),
                                   Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         "Order in Process",
                                         style: TextStyle(
-                                            fontFamily: 'SatoshiBold'
-                                        ),
+                                            fontFamily: 'SatoshiBold'),
                                       ),
                                       Text(
                                         "18th Jul 2021, 8:09 pm",
-                                        style: TextStyle(color: Colors.black54,
+                                        style: TextStyle(
+                                            color: Colors.black54,
                                             fontSize: 12,
                                             fontFamily: 'SatoshiMedium'),
                                       )
@@ -313,23 +332,28 @@ class _OrderStatusState extends State<OrderStatus> {
                                       });
                                     },
                                     child: Container(
-                                      width:
-                                      MediaQuery.of(context).size.width * 0.065,
+                                      width: MediaQuery.of(context).size.width *
+                                          0.065,
                                       height:
-                                      MediaQuery.of(context).size.height * 0.05,
+                                          MediaQuery.of(context).size.height *
+                                              0.05,
                                       decoration: BoxDecoration(
                                         shape: BoxShape.circle,
                                         border: Border.all(
-                                          color: isChecked3 ? Color(0xff29b2fe)  : Colors.grey,
+                                          color: isChecked3
+                                              ? Color(0xff29b2fe)
+                                              : Colors.grey,
                                         ),
-                                        color: isChecked3 ? Color(0xff29b2fe)  : Colors.transparent,
+                                        color: isChecked3
+                                            ? Color(0xff29b2fe)
+                                            : Colors.transparent,
                                       ),
                                       child: isChecked3
                                           ? Icon(
-                                        Icons.check,
-                                        size: 14,
-                                        color: Colors.white,
-                                      )
+                                              Icons.check,
+                                              size: 14,
+                                              color: Colors.white,
+                                            )
                                           : null,
                                     ),
                                   )
@@ -337,7 +361,7 @@ class _OrderStatusState extends State<OrderStatus> {
                               ),
                               Divider(),
                               SizedBox(height: mQuery.size.height * 0.02),
-                    
+
                               // Ready to Pickup
                               Row(
                                 children: [
@@ -358,17 +382,18 @@ class _OrderStatusState extends State<OrderStatus> {
                                   ),
                                   SizedBox(width: mQuery.size.width * 0.03),
                                   Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         "Ready to Pickup",
                                         style: TextStyle(
-                                            fontFamily: 'SatoshiBold'
-                                        ),
+                                            fontFamily: 'SatoshiBold'),
                                       ),
                                       Text(
                                         "18th Jul 2021, 8:09 pm",
-                                        style: TextStyle(color: Colors.black54,
+                                        style: TextStyle(
+                                            color: Colors.black54,
                                             fontSize: 12,
                                             fontFamily: 'SatoshiMedium'),
                                       )
@@ -382,23 +407,28 @@ class _OrderStatusState extends State<OrderStatus> {
                                       });
                                     },
                                     child: Container(
-                                      width:
-                                      MediaQuery.of(context).size.width * 0.065,
+                                      width: MediaQuery.of(context).size.width *
+                                          0.065,
                                       height:
-                                      MediaQuery.of(context).size.height * 0.05,
+                                          MediaQuery.of(context).size.height *
+                                              0.05,
                                       decoration: BoxDecoration(
                                         shape: BoxShape.circle,
                                         border: Border.all(
-                                          color: isChecked4 ? Color(0xff29b2fe) : Colors.grey,
+                                          color: isChecked4
+                                              ? Color(0xff29b2fe)
+                                              : Colors.grey,
                                         ),
-                                        color: isChecked4 ? Color(0xff29b2fe)  : Colors.transparent,
+                                        color: isChecked4
+                                            ? Color(0xff29b2fe)
+                                            : Colors.transparent,
                                       ),
                                       child: isChecked4
                                           ? Icon(
-                                        Icons.check,
-                                        size: 14,
-                                        color: Colors.white,
-                                      )
+                                              Icons.check,
+                                              size: 14,
+                                              color: Colors.white,
+                                            )
                                           : null,
                                     ),
                                   )
@@ -406,7 +436,7 @@ class _OrderStatusState extends State<OrderStatus> {
                               ),
                               Divider(),
                               SizedBox(height: mQuery.size.height * 0.02),
-                    
+
                               // Order on its way
                               Row(
                                 children: [
@@ -427,17 +457,18 @@ class _OrderStatusState extends State<OrderStatus> {
                                   ),
                                   SizedBox(width: mQuery.size.width * 0.03),
                                   Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         "Order on its way",
                                         style: TextStyle(
-                                            fontFamily: 'SatoshiBold'
-                                        ),
+                                            fontFamily: 'SatoshiBold'),
                                       ),
                                       Text(
                                         "18th Jul 2021, 8:09 pm",
-                                        style: TextStyle(color: Colors.black54,
+                                        style: TextStyle(
+                                            color: Colors.black54,
                                             fontSize: 12,
                                             fontFamily: 'SatoshiMedium'),
                                       )
@@ -451,23 +482,28 @@ class _OrderStatusState extends State<OrderStatus> {
                                       });
                                     },
                                     child: Container(
-                                      width:
-                                      MediaQuery.of(context).size.width * 0.065,
+                                      width: MediaQuery.of(context).size.width *
+                                          0.065,
                                       height:
-                                      MediaQuery.of(context).size.height * 0.05,
+                                          MediaQuery.of(context).size.height *
+                                              0.05,
                                       decoration: BoxDecoration(
                                         shape: BoxShape.circle,
                                         border: Border.all(
-                                          color: isChecked5 ? Color(0xff29b2fe)  : Colors.grey,
+                                          color: isChecked5
+                                              ? Color(0xff29b2fe)
+                                              : Colors.grey,
                                         ),
-                                        color: isChecked5 ? Color(0xff29b2fe)  : Colors.transparent,
+                                        color: isChecked5
+                                            ? Color(0xff29b2fe)
+                                            : Colors.transparent,
                                       ),
                                       child: isChecked5
                                           ? Icon(
-                                        Icons.check,
-                                        size: 14,
-                                        color: Colors.white,
-                                      )
+                                              Icons.check,
+                                              size: 14,
+                                              color: Colors.white,
+                                            )
                                           : null,
                                     ),
                                   )
@@ -475,7 +511,7 @@ class _OrderStatusState extends State<OrderStatus> {
                               ),
                               Divider(),
                               SizedBox(height: mQuery.size.height * 0.02),
-                    
+
                               // Order Delivered
                               Row(
                                 children: [
@@ -496,17 +532,18 @@ class _OrderStatusState extends State<OrderStatus> {
                                   ),
                                   SizedBox(width: mQuery.size.width * 0.03),
                                   Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         "Order Delivered",
                                         style: TextStyle(
-                                            fontFamily: 'SatoshiBold'
-                                        ),
+                                            fontFamily: 'SatoshiBold'),
                                       ),
                                       Text(
                                         "18th Jul 2021, 8:09 pm",
-                                        style: TextStyle(color: Colors.black54,
+                                        style: TextStyle(
+                                            color: Colors.black54,
                                             fontSize: 12,
                                             fontFamily: 'SatoshiMedium'),
                                       )
@@ -520,30 +557,34 @@ class _OrderStatusState extends State<OrderStatus> {
                                       });
                                     },
                                     child: Container(
-                                      width:
-                                      MediaQuery.of(context).size.width * 0.06,
+                                      width: MediaQuery.of(context).size.width *
+                                          0.06,
                                       height:
-                                      MediaQuery.of(context).size.height * 0.045,
+                                          MediaQuery.of(context).size.height *
+                                              0.045,
                                       decoration: BoxDecoration(
                                         shape: BoxShape.circle,
                                         border: Border.all(
-                                          color: isChecked6 ? Color(0xff29b2fe)  : Colors.grey,
+                                          color: isChecked6
+                                              ? Color(0xff29b2fe)
+                                              : Colors.grey,
                                         ),
-                                        color: isChecked6 ? Color(0xff29b2fe)  : Colors.transparent,
+                                        color: isChecked6
+                                            ? Color(0xff29b2fe)
+                                            : Colors.transparent,
                                       ),
                                       child: isChecked6
                                           ? Icon(
-                                        Icons.check,
-                                        size: 14,
-                                        color: Colors.white,
-                                      )
+                                              Icons.check,
+                                              size: 14,
+                                              color: Colors.white,
+                                            )
                                           : null,
                                     ),
                                   )
                                 ],
                               ),
                               Divider(),
-
                             ],
                           ),
                         )
@@ -551,30 +592,31 @@ class _OrderStatusState extends State<OrderStatus> {
                     ),
                   ),
                   GestureDetector(
-                    onTap: ()
-                    {
+                    onTap: () {
                       Navigator.of(context).pop();
                     },
                     child: Container(
                       width: double.infinity,
-                      height: mQuery.size.height*0.065,
+                      height: mQuery.size.height * 0.065,
                       margin: EdgeInsets.symmetric(
-                        horizontal: mQuery.size.width*.045
-                      ),
+                          horizontal: mQuery.size.width * .045),
                       decoration: BoxDecoration(
                           color: Color(0xff29b2fe),
-                          borderRadius: BorderRadius.circular(6)
-                      ),
+                          borderRadius: BorderRadius.circular(6)),
                       child: Center(
-                        child: Text("Done",style: TextStyle(
-                            color: Colors.white,
-                            fontFamily: 'SatoshiBold',
-                            fontSize: mQuery.size.height*0.024
-                        ),),
+                        child: Text(
+                          "Done",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontFamily: 'SatoshiBold',
+                              fontSize: mQuery.size.height * 0.024),
+                        ),
                       ),
                     ),
                   ),
-                  SizedBox(height: mQuery.size.height*0.02,)
+                  SizedBox(
+                    height: mQuery.size.height * 0.02,
+                  )
                 ],
               ),
             );
@@ -584,14 +626,13 @@ class _OrderStatusState extends State<OrderStatus> {
     );
   }
 
-
   Widget buildOrderStatusItem(
-      BuildContext context,
-      String title,
-      String subtitle,
-      bool isChecked,
-      Function onTap,
-      ) {
+    BuildContext context,
+    String title,
+    String subtitle,
+    bool isChecked,
+    Function onTap,
+  ) {
     var mQuery = MediaQuery.of(context);
 
     return Row(
@@ -636,16 +677,16 @@ class _OrderStatusState extends State<OrderStatus> {
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               border: Border.all(
-                color: isChecked ? Color(0xff29b2fe)  : Colors.grey,
+                color: isChecked ? Color(0xff29b2fe) : Colors.grey,
               ),
-              color: isChecked ? Color(0xff29b2fe)  : Colors.transparent,
+              color: isChecked ? Color(0xff29b2fe) : Colors.transparent,
             ),
             child: isChecked
                 ? Icon(
-              Icons.check,
-              size: 14,
-              color: Colors.white,
-            )
+                    Icons.check,
+                    size: 14,
+                    color: Colors.white,
+                  )
                 : null,
           ),
         )
@@ -688,9 +729,9 @@ class _OrderStatusState extends State<OrderStatus> {
                   Text(
                     AppLocalizations.of(context)!.orderstatus,
                     style: const TextStyle(
-                        fontSize: 20,
-                        fontFamily : "SatoshiBold",
-                        color: Colors.white,
+                      fontSize: 20,
+                      fontFamily: "SatoshiBold",
+                      color: Colors.white,
                     ),
                   )
                 ],
@@ -749,7 +790,7 @@ class _OrderStatusState extends State<OrderStatus> {
                             const Text(
                               'Select All',
                               style: TextStyle(
-                                fontFamily : "SatoshiMedium",
+                                fontFamily: "SatoshiMedium",
                                 fontSize: 14,
                               ),
                             ),
@@ -865,7 +906,8 @@ class _OrderStatusState extends State<OrderStatus> {
                                                     ? const Icon(
                                                         Icons.check,
                                                         size: 10,
-                                                        color: Color(0xff29b2fe),
+                                                        color:
+                                                            Color(0xff29b2fe),
                                                       )
                                                     : null,
                                               ),
@@ -893,8 +935,7 @@ class _OrderStatusState extends State<OrderStatus> {
                                               Text(
                                                 'Order #${index + 1}',
                                                 style: const TextStyle(
-                                                  fontFamily: 'SatoshiBold'
-                                                ),
+                                                    fontFamily: 'SatoshiBold'),
                                               ),
                                               Text(
                                                 time,
@@ -942,7 +983,9 @@ class _OrderStatusState extends State<OrderStatus> {
                             onTap: () {
                               Navigator.pushReplacement(context,
                                   MaterialPageRoute(builder: (context) {
-                                return const BotNav();
+                                return BotNav(
+                                  indexx: 1,
+                                );
                               }));
                             },
                             child: Container(
@@ -975,7 +1018,6 @@ class _OrderStatusState extends State<OrderStatus> {
           ],
         ),
       ),
-
     );
   }
 }

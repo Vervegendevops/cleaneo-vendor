@@ -230,7 +230,9 @@ class _OTPPageState extends State<OTPPage> {
                               Navigator.push(context,
                                   MaterialPageRoute(builder: (context) {
                                 return (Otp == 'Login')
-                                    ? BotNav()
+                                    ? BotNav(
+                                        indexx: 0,
+                                      )
                                     : StoreDetailsPage();
                               }));
                             } else {

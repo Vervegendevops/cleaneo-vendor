@@ -47,7 +47,9 @@ class _ChangeStatusSheetState extends State<ChangeStatusSheet> {
         print('hello');
         // Navigator.pop(context as BuildContext);
         Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return BotNav();
+          return BotNav(
+            indexx: 1,
+          );
         }));
       } else {
         // API call failed
@@ -110,7 +112,15 @@ class _ChangeStatusSheetState extends State<ChangeStatusSheet> {
             ),
             GestureDetector(
               onTap: () {
-                _triggerApiCall();
+                if (widget.statusCount < 5) {
+                  _triggerApiCall();
+                } else {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return BotNav(
+                      indexx: 1,
+                    );
+                  }));
+                }
               },
               child: Container(
                 width: double.infinity,

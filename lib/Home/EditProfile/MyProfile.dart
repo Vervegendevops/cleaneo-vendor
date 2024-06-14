@@ -61,7 +61,9 @@ class _MyProfilePageState extends State<MyProfilePage> {
                     onTap: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
-                        return const BotNav();
+                        return BotNav(
+                          indexx: 0,
+                        );
                       }));
                     },
                     child: const Icon(
@@ -329,7 +331,9 @@ class _MyProfilePageState extends State<MyProfilePage> {
                               onTap: () {
                                 Navigator.push(context,
                                     MaterialPageRoute(builder: (context) {
-                                  return const BotNav();
+                                  return BotNav(
+                                    indexx: 0,
+                                  );
                                 }));
                               },
                               child: Container(

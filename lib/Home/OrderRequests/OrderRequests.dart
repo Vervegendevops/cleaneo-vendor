@@ -77,7 +77,9 @@ class _OrderReqState extends State<OrderReq> {
                     onTap: () {
                       Navigator.of(context).pushReplacement(
                         MaterialPageRoute(
-                          builder: (BuildContext context) => const BotNav(),
+                          builder: (BuildContext context) => BotNav(
+                            indexx: 0,
+                          ),
                         ),
                       );
                     },

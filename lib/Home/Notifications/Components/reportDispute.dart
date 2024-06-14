@@ -133,8 +133,7 @@ class _ReportDisputeState extends State<ReportDispute> {
                                       .quantitymismatch,
                                   // textAlign: TextAlign.center,
                                   style: const TextStyle(
-                                    fontFamily: 'SatoshiMedium'
-                                     ),
+                                      fontFamily: 'SatoshiMedium'),
                                 ),
                               ],
                             )),
@@ -178,8 +177,7 @@ class _ReportDisputeState extends State<ReportDispute> {
                                   AppLocalizations.of(context)!.stains,
                                   // textAlign: TextAlign.center,
                                   style: const TextStyle(
-                                      fontFamily: 'SatoshiMedium'
-                                  ),
+                                      fontFamily: 'SatoshiMedium'),
                                 ),
                               ],
                             )),
@@ -223,8 +221,7 @@ class _ReportDisputeState extends State<ReportDispute> {
                                   AppLocalizations.of(context)!.typeofcloth,
                                   // textAlign: TextAlign.center,
                                   style: const TextStyle(
-                                      fontFamily: 'SatoshiMedium'
-                                  ),
+                                      fontFamily: 'SatoshiMedium'),
                                 ),
                               ],
                             )),
@@ -250,8 +247,7 @@ class _ReportDisputeState extends State<ReportDispute> {
                                 AppLocalizations.of(context)!.anyotherdispute,
                                 // textAlign: TextAlign.center,
                                 style: const TextStyle(
-                                    fontFamily: 'SatoshiBold',
-                                fontSize: 15),
+                                    fontFamily: 'SatoshiBold', fontSize: 15),
                               ),
                             ),
                           ],
@@ -311,8 +307,7 @@ class _ReportDisputeState extends State<ReportDispute> {
                                 AppLocalizations.of(context)!.uploadpics,
                                 // textAlign: TextAlign.center,
                                 style: const TextStyle(
-                                    fontFamily: 'SatoshiBold',
-                                fontSize: 15),
+                                    fontFamily: 'SatoshiBold', fontSize: 15),
                               ),
                             ),
                           ],
@@ -353,7 +348,9 @@ class _ReportDisputeState extends State<ReportDispute> {
                             //SystemNavigator.pop();
                             Navigator.pushReplacement(context,
                                 MaterialPageRoute(builder: (context) {
-                              return const BotNav();
+                              return BotNav(
+                                indexx: 0,
+                              );
                             }));
                           },
                           child: Container(

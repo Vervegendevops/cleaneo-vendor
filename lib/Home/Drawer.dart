@@ -182,7 +182,9 @@ class _MyDrawerState extends State<MyDrawer> {
                             onTap: () {
                               Navigator.pushReplacement(context,
                                   MaterialPageRoute(builder: (context) {
-                                return const BotNav();
+                                return BotNav(
+                                  indexx: 0,
+                                );
                               }));
                             },
                             child: ListTile(

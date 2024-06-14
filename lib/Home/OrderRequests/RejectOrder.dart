@@ -350,7 +350,9 @@ class _RejectOrderState extends State<RejectOrder> {
                             //SystemNavigator.pop();
                             Navigator.pushReplacement(context,
                                 MaterialPageRoute(builder: (context) {
-                              return const BotNav();
+                              return BotNav(
+                                indexx: 0,
+                              );
                             }));
                           },
                           child: Container(

@@ -8,7 +8,9 @@ import 'package:cleaneo_vendor/Home/Earnings/Components/RowofThreeText.dart';
 import 'package:cleaneo_vendor/Home/BotNav.dart';
 import 'package:cleaneo_vendor/Home/OrderRequests/OrderReqDemoData.dart';
 import 'package:cleaneo_vendor/Home/YourOrders/Components/Rowof2Text.dart';
+import 'package:cleaneo_vendor/Screens/Auth/Login.dart';
 import 'package:cleaneo_vendor/Screens/Vendor_Onboarding/uploadAdhaar.dart';
+import 'package:cleaneo_vendor/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -29,7 +31,7 @@ class _YourOrdersState extends State<YourOrders> {
   TextEditingController gstinController = TextEditingController();
   Future<Object> fetchResponse() async {
     final url =
-        'https://drycleaneo.com/CleaneoVendor/api/orderRequest/CleaneoVendor00011';
+        'https://drycleaneo.com/CleaneoVendor/api/orderRequest/${UserLoggedIn.read('UID')}';
 
     try {
       final response = await http.get(Uri.parse(url));

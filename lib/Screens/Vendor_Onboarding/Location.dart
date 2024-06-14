@@ -84,8 +84,7 @@ class _LocationState extends State<Location> {
                                 AppLocalizations.of(context)!.locationdesc,
                                 textAlign: TextAlign.center,
                                 style: const TextStyle(
-                                  fontFamily: 'SatoshiMedium',
-                                     fontSize: 15),
+                                    fontFamily: 'SatoshiMedium', fontSize: 15),
                               ),
                             ),
                           ],
@@ -103,7 +102,9 @@ class _LocationState extends State<Location> {
                             //SystemNavigator.pop();
                             Navigator.push(context,
                                 MaterialPageRoute(builder: (context) {
-                              return const BotNav();
+                              return BotNav(
+                                indexx: 0,
+                              );
                             }));
                           },
                           child: Container(
