@@ -1,9 +1,12 @@
+import 'dart:convert';
+
 import 'package:cleaneo_vendor/Home/CashCollected/CashCollected.dart';
 import 'package:cleaneo_vendor/Home/Drawer.dart';
 import 'package:cleaneo_vendor/Home/Earnings/MyEarnings.dart';
 import 'package:cleaneo_vendor/Home/EditProfile/MyProfile.dart';
 import 'package:cleaneo_vendor/Home/Inventory%20Request/inventory_request_page.dart';
 import 'package:cleaneo_vendor/Home/Ledger/Ledger.dart';
+import 'package:cleaneo_vendor/Home/OrderRequests/OrderReqDemoData.dart';
 import 'package:cleaneo_vendor/Home/OrderRequests/OrderRequests.dart';
 import 'package:cleaneo_vendor/Home/OrderStatus/OrderStatus.dart';
 import 'package:cleaneo_vendor/Home/Training%20Modules/training_modules_page.dart';
@@ -25,6 +28,32 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   // https://drycleaneo.com/CleaneoVendor/api/onOff/CleaneoVendor00011
+  bool status = false;
+  Future<Object> fetchResponse23() async {
+    final url =
+        'https://drycleaneo.com/CleaneoVendor/api/orderRequest/${UserLoggedIn.read('UID')}';
+
+    try {
+      final response = await http.get(Uri.parse(url));
+
+      if (response.statusCode == 200) {
+        setState(() {
+          print(response.body);
+          OrderRequest = jsonDecode(response.body);
+        });
+        print(OrderRequest[0]['created_at']);
+        return response.body == 'true';
+      } else {
+        // If the response status code is not 200, throw an exception or handle
+        // the error accordingly.
+        throw Exception('Failed to fetch data: ${response.statusCode}');
+      }
+    } catch (e) {
+      // Handle exceptions if any occur during the request.
+      print('Error fetching data: $e');
+      return false; // Return false in case of an error.
+    }
+  }
 
   Future<Object> fetchResponse() async {
     final url =
@@ -35,6 +64,43 @@ class _HomePageState extends State<HomePage> {
 
       if (response.statusCode == 200) {
         print('otpp Sent');
+
+        // Navigator.push(context, MaterialPageRoute(builder: (context) {
+        //   return OTPPage();
+        // }));
+        return response.body == 'true';
+      } else {
+        // If the response status code is not 200, throw an exception or handle
+        // the error accordingly.
+        throw Exception('Failed to fetch data: ${response.statusCode}');
+      }
+    } catch (e) {
+      // Handle exceptions if any occur during the request.
+      print('Error fetching data: $e');
+      return false; // Return false in case of an error.
+    }
+  }
+
+  Future<Object> fetchResponse2() async {
+    final url =
+        'https://drycleaneo.com/CleaneoVendor/api/checkOnOff/${UserLoggedIn.read('UID')}';
+
+    try {
+      final response = await http.get(Uri.parse(url));
+
+      if (response.statusCode == 200) {
+        print('otpp Sent');
+        print(response.body);
+        if (response.body == 'Y') {
+          setState(() {
+            status = true;
+            print(status);
+          });
+        } else {
+          setState(() {
+            status = false;
+          });
+        }
         // Navigator.push(context, MaterialPageRoute(builder: (context) {
         //   return OTPPage();
         // }));
@@ -90,7 +156,7 @@ class _HomePageState extends State<HomePage> {
       "text": "Ledger",
     },
   ];
-  bool status = false;
+
   List<String> dealImages = [
     "https://img.freepik.com/premium-vector/super-deal-text-effect-editable-3d-text-style-suitable-banner-promotion_16148-1552.jpg",
     "https://cdn.vectorstock.com/i/preview-1x/10/75/amazing-deals-sign-over-colorful-cut-out-foil-vector-48291075.jpg",
@@ -100,6 +166,8 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    fetchResponse2();
+    fetchResponse23();
     // fetchResponse();
   }
 

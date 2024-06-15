@@ -27,6 +27,7 @@ class _YourOrders2TextState extends State<YourOrders2Text> {
 
   @override
   Widget build(BuildContext context) {
+    OrderRequest = OrderRequest;
     final List<List<Map<String, List<Map<String, String>>>>> _todaytabData = [
       [
         // Daily data

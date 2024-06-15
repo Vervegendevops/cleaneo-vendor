@@ -61,9 +61,14 @@ class _MyAppState extends State<MyApp> {
 }
 
 final authentication = GetStorage().write('Authentication', '');
-// Check
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
-  runApp(MyApp());
+  // runApp(MyApp());
+  runApp(DevicePreview(
+    builder: (context) {
+      return MyApp();
+    },
+  ));
 }
