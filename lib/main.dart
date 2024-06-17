@@ -65,10 +65,10 @@ final authentication = GetStorage().write('Authentication', '');
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
-  // runApp(MyApp());
-  runApp(DevicePreview(
-    builder: (context) {
-      return MyApp();
-    },
-  ));
+  runApp(MyApp());
+  // runApp(DevicePreview(
+  //   builder: (context) {
+  //     return MyApp();
+  //   },
+  // ));
 }
