@@ -13,10 +13,14 @@ import 'package:cleaneo_vendor/Screens/Vendor_Onboarding/uploadAdhaar.dart';
 import 'package:cleaneo_vendor/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
+
+import '../../bloc/orders_bloc.dart';
+import '../../bloc/orders_event.dart';
 
 class YourOrders extends StatefulWidget {
   const YourOrders({Key? key}) : super(key: key);
@@ -32,9 +36,11 @@ class _YourOrdersState extends State<YourOrders> {
   Future<Object> fetchResponse() async {
     final url =
         'https://drycleaneo.com/CleaneoVendor/api/orderRequest/${UserLoggedIn.read('UID')}';
+    print("url===$url");
 
     try {
       final response = await http.get(Uri.parse(url));
+      print("response====${response.body}");
 
       if (response.statusCode == 200) {
         setState(() {
@@ -129,23 +135,23 @@ class _YourOrdersState extends State<YourOrders> {
                 ],
               ),
             ),
-            Expanded(
-              child: Container(
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(16),
-                      topRight: Radius.circular(16)),
-                ),
-                child: const Column(
-                  children: [
-                    SizedBox(
-                      height: 20.0,
-                    ),
-                    Expanded(child: YourOrders2Text())
-                  ],
-                ),
+            Container(
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(16),
+                    topRight: Radius.circular(16)),
+              ),
+              child:  Column(
+                children: [
+                  SizedBox(
+                    height: 20.0,
+                  ),
+                  BlocProvider(
+                    create: (context) => OrdersBloc()..add(GetOrderEvent()),
+                    child: YourOrders2Text(),
+                  ),                ],
               ),
             )
           ],

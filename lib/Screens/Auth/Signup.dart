@@ -53,14 +53,17 @@ class _SignUpPageState extends State<SignUpPage> {
   Future<Object> fetchResponse(String phoneNumber) async {
     final url =
         'https://drycleaneo.com/CleaneoVendor/api/signedUp/$phoneNumber';
+    print("url==$url");
 
     try {
       final response = await http.get(Uri.parse(url));
+      print("response==${response.body}");
 
       if (response.statusCode == 200) {
         print(response.body);
         if (response.body == "false") {
           uniqueOTP = (1000 + Random().nextInt(9000)).toString();
+          print("OTP===$uniqueOTP");
           fetchResponse2();
 
           // Navigator.push(context, MaterialPageRoute(builder: (context) {
@@ -95,9 +98,12 @@ class _SignUpPageState extends State<SignUpPage> {
 
   Future<Object> fetchResponse2() async {
     final url = 'https://drycleaneo.com/CleaneoVendor/api/count';
+    print("url==$url");
+
     String CountUser = '';
     try {
       final response = await http.get(Uri.parse(url));
+      print("response==${response.body}");
 
       if (response.statusCode == 200) {
         print(response.body);
@@ -131,9 +137,11 @@ class _SignUpPageState extends State<SignUpPage> {
   Future<Object> fetchResponse3(String phoneNumber) async {
     final url =
         'http://app.pingbix.com/SMSApi/send?userid=cleaneoapp&password=EghpgNS3&sendMethod=quick&mobile=$phoneNumber&msg=Hello+$UserName%2C%0D%0AYour+OTP+for+Cleaneo+login%2Fsignup+is+%3A+$uniqueOTP.%0D%0AThank+You&senderid=CLE123&msgType=text&dltEntityId=&dltTemplateId=1207171510723882445&duplicatecheck=true&output=json';
+    print("url==$url");
 
     try {
       final response = await http.get(Uri.parse(url));
+      print("response==${response.body}");
 
       if (response.statusCode == 200) {
         print('otp Sent');

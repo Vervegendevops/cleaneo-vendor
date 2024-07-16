@@ -5,10 +5,12 @@ import 'package:cleaneo_vendor/Home/BotNav.dart';
 import 'package:cleaneo_vendor/Screens/Vendor_Onboarding/Verifying.dart';
 import 'package:cleaneo_vendor/Screens/Vendor_Onboarding/takeSelfie.dart';
 import 'package:cleaneo_vendor/end.dart';
+import 'package:cleaneo_vendor/utils/local_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
 import 'package:url_launcher/url_launcher.dart';
@@ -21,12 +23,25 @@ class ConfirmLegal extends StatefulWidget {
 }
 
 class _ConfirmLegalState extends State<ConfirmLegal> {
+  bool isProcessing=false;
   Future<void> postData() async {
     print('good');
     const String apiUrl = 'https://drycleaneo.com/CleaneoVendor/api/signup';
     print(ALatitude);
     print(ALongitude);
     // Load image files
+
+    List<File> imageFiles = [];
+
+    // Add files from storePicture
+    for (XFile? image in store_picture) {
+      if (image != null) {
+        imageFiles.add(File(image.path));
+      }
+    }
+
+    //List<XFile> filteredStorePictures = store_picture.where((image) => image != null).cast<XFile>().toList();
+
     String imagePath = store_picture[0]!.path;
     File imageFile = File(imagePath);
 
@@ -38,6 +53,11 @@ class _ConfirmLegalState extends State<ConfirmLegal> {
 
     String imagePath4 = store_picture[3]!.path;
     File imageFile4 = File(imagePath4);
+
+
+
+
+
 
     String imagePath5 = store_document[0]!.path;
     File imageFile5 = File(imagePath5);
@@ -84,35 +104,47 @@ class _ConfirmLegalState extends State<ConfirmLegal> {
 
       // Add JSON fields
       request.fields.addAll(jsonFields);
+      isProcessing=true;
+      setState(() {
 
+      });
       // Add image file
-      request.files.add(http.MultipartFile(
-        'store_picture1',
-        imageFile.readAsBytes().asStream(),
-        imageFile.lengthSync(),
-        filename: 'store_picture1.jpg',
-      ));
-
-      request.files.add(http.MultipartFile(
-        'store_picture2',
-        imageFile2.readAsBytes().asStream(),
-        imageFile2.lengthSync(),
-        filename: 'store_picture2.jpg',
-      ));
-
-      request.files.add(http.MultipartFile(
-        'store_picture3',
-        imageFile3.readAsBytes().asStream(),
-        imageFile3.lengthSync(),
-        filename: 'store_picture3.jpg',
-      ));
-
-      request.files.add(http.MultipartFile(
-        'store_picture4',
-        imageFile4.readAsBytes().asStream(),
-        imageFile4.lengthSync(),
-        filename: 'store_picture4.jpg',
-      ));
+      // request.files.add(http.MultipartFile(
+      //   'store_picture1',
+      //   imageFile.readAsBytes().asStream(),
+      //   imageFile.lengthSync(),
+      //   filename: 'store_picture1.jpg',
+      // ));
+      //
+      // request.files.add(http.MultipartFile(
+      //   'store_picture2',
+      //   imageFile2.readAsBytes().asStream(),
+      //   imageFile2.lengthSync(),
+      //   filename: 'store_picture2.jpg',
+      // ));
+      //
+      // request.files.add(http.MultipartFile(
+      //   'store_picture3',
+      //   imageFile3.readAsBytes().asStream(),
+      //   imageFile3.lengthSync(),
+      //   filename: 'store_picture3.jpg',
+      // ));
+      //
+      // request.files.add(http.MultipartFile(
+      //   'store_picture4',
+      //   imageFile4.readAsBytes().asStream(),
+      //   imageFile4.lengthSync(),
+      //   filename: 'store_picture4.jpg',
+      // ));
+      for (int i = 0; i < imageFiles.length; i++) {
+        File imageFile = imageFiles[i];
+        request.files.add(http.MultipartFile(
+          'store_picture${i + 1}',
+          imageFile.readAsBytes().asStream(),
+          imageFile.lengthSync(),
+          filename: 'store_picture${i + 1}.jpg',
+        ));
+      }
 
       request.files.add(http.MultipartFile(
         'store_document1',
@@ -120,6 +152,7 @@ class _ConfirmLegalState extends State<ConfirmLegal> {
         imageFile5.lengthSync(),
         filename: 'store_document1.jpg',
       ));
+
 
       request.files.add(http.MultipartFile(
         'store_document2',
@@ -173,21 +206,37 @@ class _ConfirmLegalState extends State<ConfirmLegal> {
       var response = await request.send();
 
       if (response.statusCode == 200) {
+        isProcessing=false;
+        setState(() {
+
+        });
         // Handle a successful response here
         var responseBody = await response.stream.bytesToString();
         print("Success: $responseBody");
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (_) => BotNav(
-                      indexx: 0,
-                    )));
+        await LocalStorage.saveRegisteration("register");
+        // Navigator.push(
+        //     context,
+        //     MaterialPageRoute(
+        //         builder: (_) => BotNav(
+        //               indexx: 0,
+        //             )));
+        Fluttertoast.showToast(msg: "Your data is summitted successfully");
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>Verifying()));
       } else {
+        isProcessing=false;
+        setState(() {
+
+        });
         // Handle errors or other status codes here
+        Fluttertoast.showToast(msg: "something went wrong");
         print("Error: ${response.statusCode}");
         print("Response: ${await response.stream.bytesToString()}");
       }
     } catch (e) {
+      isProcessing=false;
+      setState(() {
+
+      });
       print("Error: $e");
       // Handle network-related errors here
     }
@@ -386,7 +435,7 @@ class _ConfirmLegalState extends State<ConfirmLegal> {
                                       : const Color(0xff29b2fe),
                                   borderRadius: BorderRadius.circular(6)),
                               child: Center(
-                                child: const Text(
+                                child: isProcessing?CircularProgressIndicator(color: Colors.white,): Text(
                                   "Finish",
                                   style: TextStyle(
                                       fontSize: 15,

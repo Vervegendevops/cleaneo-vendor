@@ -11,11 +11,24 @@ import 'package:cleaneo_vendor/Home/Training%20Modules/training_modules_page.dar
 import 'package:cleaneo_vendor/Home/YourOrders/YourOrders.dart';
 import 'package:cleaneo_vendor/Home/Inventory%20Request/inventory_request_page.dart';
 import 'package:cleaneo_vendor/Screens/Welcome/WelcomePage.dart';
+import 'package:cleaneo_vendor/Screens/join_us_screen.dart';
 import 'package:cleaneo_vendor/main.dart';
+import 'package:cleaneo_vendor/utils/local_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_profile_picture/flutter_profile_picture.dart';
 import 'package:provider/provider.dart';
+
+import '../bloc/home/home_bloc.dart';
+import '../bloc/home/home_event.dart';
+import '../bloc/notification/notification_bloc.dart';
+import '../bloc/notification/notification_event.dart';
+import '../bloc/orders_bloc.dart';
+import '../bloc/orders_event.dart';
+import '../notification/notification_page.dart';
+import 'Earnings/Components/RowofThreeText.dart';
+import 'YourOrders/Components/Rowof2Text.dart';
 
 class MyDrawer extends StatefulWidget {
   const MyDrawer({super.key});
@@ -69,10 +82,10 @@ class _MyDrawerState extends State<MyDrawer> {
                               ),
                               GestureDetector(
                                 onTap: () {
-                                  Navigator.push(context,
-                                      MaterialPageRoute(builder: (context) {
-                                    return MyProfilePage();
-                                  }));
+                                  // Navigator.push(context,
+                                  //     MaterialPageRoute(builder: (context) {
+                                  //   return MyProfilePage();
+                                  // }));
                                 },
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -94,11 +107,11 @@ class _MyDrawerState extends State<MyDrawer> {
                                         ),
                                         GestureDetector(
                                           onTap: () {
-                                            Navigator.push(context,
-                                                MaterialPageRoute(
-                                                    builder: (context) {
-                                              return MyProfilePage();
-                                            }));
+                                            // Navigator.push(context,
+                                            //     MaterialPageRoute(
+                                            //         builder: (context) {
+                                            //   return MyProfilePage();
+                                            // }));
                                           },
                                           child: Container(
                                             padding: const EdgeInsets.only(
@@ -246,7 +259,10 @@ class _MyDrawerState extends State<MyDrawer> {
                           onTap: () {
                             Navigator.push(context,
                                 MaterialPageRoute(builder: (context) {
-                              return const YourOrders();
+                              return  BlocProvider(
+                                create: (context) => OrdersBloc()..add(GetOrderEvent())..add(GetPreviousOrderEvent()),
+                                child: YourOrders2Text(),
+                              );
                             }));
                           },
                           child: ListTile(
@@ -267,7 +283,10 @@ class _MyDrawerState extends State<MyDrawer> {
                           onTap: () {
                             Navigator.push(context,
                                 MaterialPageRoute(builder: (context) {
-                              return Notifications();
+                              return  BlocProvider(
+                                create: (context) => NotificationBloc()..add(GetNotificationEvent()),
+                                child: NotificationsPage(),
+                              );
                             }));
                           },
                           child: ListTile(
@@ -288,7 +307,10 @@ class _MyDrawerState extends State<MyDrawer> {
                           onTap: () {
                             Navigator.push(context,
                                 MaterialPageRoute(builder: (context) {
-                              return MyEarnings();
+                              return  BlocProvider(
+                                create: (context) => HomeBloc()..add(GetEarningsEvent()),
+                                child: NavigationWithTabs(),
+                              );
                             }));
                           },
                           child: ListTile(
@@ -421,22 +443,27 @@ class _MyDrawerState extends State<MyDrawer> {
               color: Colors.white,
               child: Column(
                 children: [
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: mQuery.size.width * 0.045),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          color: const Color(0xff29B2FE),
-                          borderRadius: BorderRadius.circular(8)),
-                      width: double.infinity,
-                      height: mQuery.size.height * 0.04,
-                      child: Center(
-                        child: Text(
-                          "Join us as a partner",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: mQuery.size.height * 0.02,
-                              fontFamily: 'SatoshiBold'),
+                  InkWell(
+                    onTap: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>JoinUsScreen()));
+                    },
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: mQuery.size.width * 0.045),
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: const Color(0xff29B2FE),
+                            borderRadius: BorderRadius.circular(8)),
+                        width: double.infinity,
+                        height: mQuery.size.height * 0.04,
+                        child: Center(
+                          child: Text(
+                            "Join us as a partner",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: mQuery.size.height * 0.02,
+                                fontFamily: 'SatoshiBold'),
+                          ),
                         ),
                       ),
                     ),
@@ -458,7 +485,8 @@ class _MyDrawerState extends State<MyDrawer> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 GestureDetector(
-                                  onTap: () {
+                                  onTap: () async {
+                                    await LocalStorage.saveRegisteration("");
                                     Navigator.pushReplacement(context,
                                         MaterialPageRoute(builder: (context) {
                                       return WelcomePage();

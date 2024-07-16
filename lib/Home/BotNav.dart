@@ -1,4 +1,8 @@
 import 'package:cleaneo_vendor/Screens/Welcome/WelcomePage.dart';
+import 'package:cleaneo_vendor/bloc/home/home_bloc.dart';
+import 'package:cleaneo_vendor/bloc/home/home_event.dart';
+import 'package:cleaneo_vendor/bloc/orders_bloc.dart';
+import 'package:cleaneo_vendor/bloc/orders_event.dart';
 import 'package:flutter/material.dart';
 import 'package:cleaneo_vendor/Home/Donate/Donate.dart';
 import 'package:cleaneo_vendor/Home/Donate/DonateSlider.dart';
@@ -7,6 +11,13 @@ import 'package:cleaneo_vendor/Home/Notifications/Notifications.dart';
 import 'package:cleaneo_vendor/Home/YourOrders/YourOrders.dart';
 import 'package:cleaneo_vendor/Home/CashCollected/CashCollected.dart';
 import 'package:cleaneo_vendor/Home/Earnings/MyEarnings.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../bloc/notification/notification_bloc.dart';
+import '../bloc/notification/notification_event.dart';
+import '../notification/notification_page.dart';
+import 'Earnings/Components/RowofThreeText.dart';
+import 'YourOrders/Components/Rowof2Text.dart';
 
 class BotNav extends StatefulWidget {
   int indexx;
@@ -39,11 +50,24 @@ class _BotNavState extends State<BotNav> {
           });
         },
         children: [
-          const HomePage(),
-          const YourOrders(),
-          const Notifications(),
+           BlocProvider(
+  create: (context) => HomeBloc(),
+  child: HomePage(),
+),
+          //const YourOrders(),
+          BlocProvider(
+  create: (context) => OrdersBloc()..add(GetOrderEvent())..add(GetPreviousOrderEvent()),
+  child: YourOrders2Text(),
+),
+          BlocProvider(
+            create: (context) => NotificationBloc()..add(GetNotificationEvent()),
+            child: NotificationsPage(),
+          ),
           Donate(),
-          const MyEarnings(),
+           BlocProvider(
+  create: (context) => HomeBloc()..add(GetEarningsEvent()),
+  child: NavigationWithTabs(),
+),
         ],
       ),
       bottomNavigationBar: Container(

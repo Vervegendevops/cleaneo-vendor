@@ -341,10 +341,10 @@ class _StoreDetailsPageState extends State<StoreDetailsPage> {
                         ),
                         GestureDetector(
                           onTap: () {
-                            print(storeName);
-                            print(address);
-                            print(gst);
-                            print(selectedServices);
+                            print("storeName=$storeName");
+                            print("address=$address");
+                            print("gst=$gst");
+                            print("selectedServices=$selectedServices");
                             if (storeName.isEmpty ||
                                 address.isEmpty ||
                                 gst.isEmpty ||

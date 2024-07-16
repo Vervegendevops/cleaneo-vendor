@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:cleaneo_vendor/Constant/signupVariables.dart';
 import 'package:cleaneo_vendor/Screens/Auth/otp_page.dart';
 import 'package:cleaneo_vendor/Screens/Auth/Signup.dart';
+import 'package:cleaneo_vendor/Screens/Vendor_Onboarding/Verifying.dart';
 import 'package:cleaneo_vendor/Screens/Welcome/WelcomePage.dart';
 import 'package:cleaneo_vendor/main.dart';
 import 'package:get_storage/get_storage.dart';
@@ -14,6 +15,9 @@ import 'package:getwidget/components/loader/gf_loader.dart';
 import 'package:getwidget/types/gf_loader_type.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:country_code_picker/country_code_picker.dart';
+
+import '../../model/user.dart';
+import '../../utils/local_storage.dart';
 
 final authentication = GetStorage();
 Map UserDataFinal = {};
@@ -47,17 +51,20 @@ class _LoginPageState extends State<LoginPage> {
   Future<Object> fetchResponse(String phoneNumber) async {
     final url =
         'https://drycleaneo.com/CleaneoVendor/api/signedUp/$phoneNumber';
+    print("url==$url");
 
     try {
       final response = await http.get(Uri.parse(url));
 
       if (response.statusCode == 200) {
-        print(response.body);
+        print("response=${response.body}");
+
 
         if (response.body == 'false') {
           setState(() {
             ispressed = false;
           });
+
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text('User does not exists. Please Sign up.'),
@@ -69,9 +76,26 @@ class _LoginPageState extends State<LoginPage> {
           );
         } else {
           UserDataFinal = jsonDecode(response.body);
-          uniqueOTP = (1000 + Random().nextInt(9000)).toString();
-          authentication.write('Authentication', 'loggedIN');
-          fetchResponse2(phoneNumber);
+          var status=UserDataFinal["status"];
+          print("status==$status");
+
+            uniqueOTP = (1000 + Random().nextInt(9000)).toString();
+            print("OTP==$uniqueOTP");
+            authentication.write('Authentication', 'loggedIN');
+            if(status=="A"){
+              var jsondata=jsonDecode(response.body);
+              User user = User.fromJson(jsondata);
+              await LocalStorage().saveUser(user);
+              fetchResponse2(phoneNumber,status);
+
+            }
+            else{
+              fetchResponse2(phoneNumber,status);
+
+            }
+
+
+
         }
         return response.body == 'true';
       } else {
@@ -86,7 +110,7 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
-  Future<Object> fetchResponse2(String phoneNumber) async {
+  Future<Object> fetchResponse2(String phoneNumber, status) async {
     final url =
         'http://app.pingbix.com/SMSApi/send?userid=cleaneoapp&password=EghpgNS3&sendMethod=quick&mobile=$phoneNumber&msg=Hello+${UserDataFinal['name']}%2C%0D%0AYour+OTP+for+Cleaneo+login%2Fsignup+is+%3A+$uniqueOTP.%0D%0AThank+You&senderid=CLE123&msgType=text&dltEntityId=&dltTemplateId=1207171510723882445&duplicatecheck=true&output=json';
 
@@ -95,9 +119,19 @@ class _LoginPageState extends State<LoginPage> {
 
       if (response.statusCode == 200) {
         print('otp Sent');
-        Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return OTPPage();
-        }));
+        if(status=="P")
+          {
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>Verifying(status: status,)));
+
+          }
+        else{
+
+          await LocalStorage.saveRegisteration("register");
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return OTPPage();
+          }));
+        }
+
         return response.body == 'true';
       } else {
         // If the response status code is not 200, throw an exception or handle

@@ -10,14 +10,19 @@ import 'package:cleaneo_vendor/Home/OrderRequests/OrderReqDemoData.dart';
 import 'package:cleaneo_vendor/Home/OrderRequests/OrderRequests.dart';
 import 'package:cleaneo_vendor/Home/OrderStatus/OrderStatus.dart';
 import 'package:cleaneo_vendor/Home/Training%20Modules/training_modules_page.dart';
+import 'package:cleaneo_vendor/bloc/home/home_bloc.dart';
+import 'package:cleaneo_vendor/bloc/home/home_event.dart';
 import 'package:cleaneo_vendor/main.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_profile_picture/flutter_profile_picture.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
+
+import '../Earnings/Components/RowofThreeText.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -174,6 +179,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     var mQuery = MediaQuery.of(context);
+    var serviceBloc=BlocProvider.of<HomeBloc>(context);
 
     return Scaffold(
       drawer: const MyDrawer(),
@@ -447,8 +453,11 @@ class _HomePageState extends State<HomePage> {
                           onTap: () {
                             Navigator.push(context,
                                 MaterialPageRoute(builder: (context) {
-                              return MyEarnings();
-                            }));
+                                  return  BlocProvider(
+                                    create: (context) => HomeBloc()..add(GetEarningsEvent()),
+                                    child: NavigationWithTabs(),
+                                  );
+                                }));
                           },
                           child: Container(
                             width: mQuery.size.width * 0.4,

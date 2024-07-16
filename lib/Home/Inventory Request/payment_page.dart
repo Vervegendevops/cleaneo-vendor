@@ -3,14 +3,14 @@ import 'package:cleaneo_vendor/Home/Home_/Home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class PaymentPage extends StatefulWidget {
-  const PaymentPage({Key? key}) : super(key: key);
+class PaymentPagee extends StatefulWidget {
+  const PaymentPagee({Key? key}) : super(key: key);
 
   @override
-  State<PaymentPage> createState() => _PaymentPageState();
+  State<PaymentPagee> createState() => _PaymentPageState();
 }
 
-class _PaymentPageState extends State<PaymentPage> {
+class _PaymentPageState extends State<PaymentPagee> {
   int selectedPaymentMethod = -1;
 
   @override

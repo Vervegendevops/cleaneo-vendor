@@ -1,10 +1,17 @@
 import 'package:cleaneo_vendor/Home/BotNav.dart';
 import 'package:cleaneo_vendor/Screens/Splash.dart';
+import 'package:cleaneo_vendor/services/api_provider.dart';
+import 'package:cleaneo_vendor/utils/local_storage.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get_storage/get_storage.dart';
+
+import 'Home/Ledger/transaction_screen.dart';
+import 'Screens/Vendor_Onboarding/Verifying.dart';
+import 'model/cash_collection.dart';
+import 'model/user.dart';
 
 String Otp = '';
 final UserLoggedIn = GetStorage();
@@ -27,6 +34,8 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   late Locale _locale = const Locale('en');
+  String isLogin="";
+  String id="";
 
   void setLocale(String languageCode) {
     setState(() {
@@ -34,6 +43,22 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getData();
+  }
+  Future<void> getData() async {
+    isLogin=await LocalStorage.getRegisteration();
+    User? user=await LocalStorage().getUser();
+    id=user?.id??"";
+
+
+    setState(() {
+
+    });
+  }
   @override
   Widget build(BuildContext context) {
     print(UserLoggedIn.read('IsAuthenticated'));
@@ -52,11 +77,12 @@ class _MyAppState extends State<MyApp> {
           GlobalWidgetsLocalizations.delegate,
         ],
         supportedLocales: const [Locale('en'), Locale('hi')],
-        home: UserLoggedIn.read('IsAuthenticated') == 'true'
-            ? BotNav(
-                indexx: 0,
-              )
-            : SplashScreen());
+        home:
+        // UserLoggedIn.read('IsAuthenticated') == 'true'
+      id==""
+            ? SplashScreen()
+      //
+            :BotNav(indexx: 0,) );
   }
 }
 

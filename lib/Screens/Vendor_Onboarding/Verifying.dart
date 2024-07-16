@@ -6,10 +6,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 
 class Verifying extends StatefulWidget {
-  const Verifying({Key? key}) : super(key: key);
+  String? status;
+   Verifying({Key? key,this.status}) : super(key: key);
 
   @override
   State<Verifying> createState() => _VerifyingState();
@@ -100,10 +102,16 @@ class _VerifyingState extends State<Verifying> {
                         GestureDetector(
                           onTap: () {
                             //SystemNavigator.pop();
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) {
-                              return const Verified();
-                            }));
+                            if(widget.status=="P"){
+                              Fluttertoast.showToast(msg: "Please wait for Verification Process");
+                            }
+                            else{
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) {
+                                    return const Verified();
+                                  }));
+                            }
+
                           },
                           child: Container(
                             width: double.infinity,
